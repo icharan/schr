@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rainfall Alert Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    select, button {
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .checkbox-group {
+      max-height: 250px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin: 5px 0;
+      font-weight: normal;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #eef;
+      border: 1px solid #99c;
+      border-radius: 5px;
+    }
+
+    .clear-button {
+      background-color: #e74c3c;
+      color: #fff;
+      margin-top: 10px;
+      width: auto;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .clear-button:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Rainfall Alert Form</h1>
+  <form id="rainfallForm">
+    
+    <!-- Rainfall Type -->
+    <label for="rainfallType">Select Rainfall Type:</label>
+    <select id="rainfallType" required>
+      <option value="Heavy">Heavy</option>
+      <option value="Very Heavy">Very Heavy</option>
+      <option value="Moderate">Moderate</option>
+      <option value="Light">Light</option>
+    </select>
+
+    <!-- Location Coverage -->
+    <label for="locationCoverage">Select Location Coverage:</label>
+    <select id="locationCoverage" required>
+      <option value="Local">Local</option>
+      <option value="Regional">Regional</option>
+      <option value="National">National</option>
+    </select>
+
+    <!-- States -->
+    <label for="states">Select States:</label>
+    <select id="states" multiple required>
+      <option value="Andhra Pradesh">Andhra Pradesh</option>
+      <option value="Telangana">Telangana</option>
+      <option value="Tamil Nadu">Tamil Nadu</option>
+      <option value="Karnataka">Karnataka</option>
+    </select>
+
+    <!-- Districts Checkboxes -->
+    <label>Districts:</label>
+   <div class="districts-container">
+           <div class="form-group checkbox-group">
+             <label>Districts</label><br>
+             <label><input type="checkbox" name="district" value="SRIKAKULAM">SRIKAKULAM</label>
+             <label><input type="checkbox" name="district" value="PARVATHIPURAM MANYAM">PARVATHIPURAM MANYAM</label>
+             <label><input type="checkbox" name="district" value="VIZIANAGARAM">VIZIANAGARAM</label>
+             <label><input type="checkbox" name="district" value="VISAKHAPATNAM">VISAKHAPATNAM</label> 
+             <label><input type="checkbox" name="district" value="ALLURI SITHARAMA RAJU">ALLURI SITHARAMA RAJU</label>
+             <label><input type="checkbox" name="district" value="ANAKAPALLI">ANAKAPALLI</label>
+             <label><input type="checkbox" name="district" value="KAKINADA">KAKINADA</label>
+             <label><input type="checkbox" name="district" value="YANAM">YANAM</label>
+             <label><input type="checkbox" name="district" value="Dr.B.R.AMBEDKAR KONASEEMA">Dr.B.R.AMBEDKAR KONASEEMA</label>
+             <label><input type="checkbox" name="district" value="EAST GODAVARI">EAST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="WEST GODAVARI">WEST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="ELURU">ELURU</label>
+             <label><input type="checkbox" name="district" value="NTR">NTR</label>
+             <label><input type="checkbox" name="district" value="KRISHNA">KRISHNA</label>
+             <label><input type="checkbox" name="district" value="GUNTUR">GUNTUR</label>
+             <label><input type="checkbox" name="district" value="PALNADU">PALNADU</label>
+             <label><input type="checkbox" name="district" value="BAPATLA">BAPATLA</label>
+             <label><input type="checkbox" name="district" value="PRAKASAM">PRAKASAM</label>
+             <label><input type="checkbox" name="district" value="SRI POTTI SRIRAMULU NELLORE">SRI POTTI SRIRAMULU NELLORE</label>
+             <label><input type="checkbox" name="district" value="CHITTOOR">CHITTOOR</label>
+             <label><input type="checkbox" name="district" value="TIRUPATI">TIRUPATI</label>
+             <label><input type="checkbox" name="district" value="ANNAMAYYA">ANNAMAYYA</label>
+             <label><input type="checkbox" name="district" value="YSR KADAPA">YSR KADAPA</label>
+             <label><input type="checkbox" name="district" value="KURNOOL">KURNOOL</label>
+             <label><input type="checkbox" name="district" value="NANDYAL">NANDYAL</label>
+             <label><input type="checkbox" name="district" value="SRI SATHYA SAI">SRI SATHYA SAI</label>
+             <label><input type="checkbox" name="district" value="ANANTAPUR">ANANTAPUR</label>
+             <button class="clear-button" onclick="clearSelection()">Clear Selection</button>
+         </div>
+
+    <!-- Submit -->
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Output Section -->
+  <div class="output" id="message"></div>
+</div>
+
+<script>
+  const form = document.getElementById('rainfallForm');
+  const message = document.getElementById('message');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Rainfall Type
+    const rainfallType = document.getElementById('rainfallType').value;
+
+    // Location Coverage
+    const locationCoverage = document.getElementById('locationCoverage').value;
+
+    // States
+    const states = Array.from(document.getElementById('states').selectedOptions).map(opt => opt.value);
+
+    // Districts (checked checkboxes)
+    const checkedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(cb => cb.value);
+
+    // Display the message
+    message.innerHTML = `
+      <h3>Selected Options:</h3>
+      <p><strong>Rainfall Type:</strong> ${rainfallType}</p>
+      <p><strong>Location Coverage:</strong> ${locationCoverage}</p>
+      <p><strong>States:</strong> ${states.join(', ') || 'None'}</p>
+      <p><strong>Districts:</strong> ${checkedDistricts.join(', ') || 'None selected'}</p>
+    `;
+  });
+
+  // Clear all district checkboxes
+  function clearSelection() {
+    const checkboxes = document.querySelectorAll('input[name="district"]');
+    checkboxes.forEach(cb => cb.checked = false);
+  }
+</script>
+
+</body>
+</html>

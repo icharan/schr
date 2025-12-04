@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            margin-right: 10px;
+        }
+        select, input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .districts {
+            margin-top: 10px;
+        }
+        .rainfall-category, .location-coverage {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="rainfall-category">
+            <h3>North Coastal Andhra Pradesh Rainfall Category:</h3>
+            <select id="northCoastalRainfallCategory">
+                <option value="HEAVY">Heavy Rainfall</option>
+                <option value="HEAVY_TO_VERY_HEAVY">Heavy to Very Heavy Rainfall</option>
+                <option value="EXTREME_HEAVY">Extremely Heavy Rainfall</option>
+            </select>
+        </div>
+
+  <div class="location-coverage">
+            <h3>North Coastal Andhra Pradesh Location Coverage:</h3>
+            <select id="northCoastalLocationCoverage">
+                <option value="ONE_OR_TWO">ONE OR TWO PLACES</option>
+                <option value="FEW">FEW PLACES</option>
+                <option value="MANY">MANY PLACES</option>
+            </select>
+        </div>
+
+        <div class="rainfall-category">
+            <h3>South Coastal Andhra Pradesh Rainfall Category:</h3>
+            <select id="southCoastalRainfallCategory">
+                <option value="HEAVY">Heavy Rainfall</option>
+                <option value="HEAVY_TO_VERY_HEAVY">Heavy to Very Heavy Rainfall</option>
+                <option value="EXTREMELY_HEAVY">Extremely Heavy Rainfall</option>
+            </select>
+        </div>  
+
+        <div class="location-coverage">
+            <h3>South Coastal Andhra Pradesh Location Coverage:</h3>
+            <select id="southCoastalLocationCoverage">
+                <option value="ONE_OR_TWO">ONE OR TWO PLACES</option>
+                <option value="FEW">FEW PLACES</option>
+                <option value="MANY">MANY PLACES</option>
+            </select>
+        </div>
+
+        <div class="districts">
+            <h3>North Coastal Andhra Pradesh</h3>
+            <div>
+                <label><input type="checkbox" name="northCoastalDistrict" value="ALLURI SITHARAMA RAJU">Alluri Sitharama Raju</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="ANAKAPALLI">Anakapalli</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="EAST GODAVARI">East Godavari</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="ELURU">Eluru</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="KAKINADA">Kakinada</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="Dr.B.R.AMBEDKAR KONASEEMA">Konaseema</label>
+             
+                <label><input type="checkbox" name="northCoastalDistrict" value="PARVATHIPURAM MANYAM">Parvathipuram Manyam</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="SRIKAKULAM">Srikakulam</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="VISAKHAPATNAM">Visakhapatnam</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="VIZIANAGARAM">Vizianagaram</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="WEST GODAVARI">West Godavari</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="YANAM">Yanam</label>
+            </div>
+        </div>
+
+        <div class="districts">
+            <h3>South Coastal Andhra Pradesh</h3>
+            <div>
+                <label><input type="checkbox" name="southCoastalDistrict" value="BAPATLA">Bapatla</label>
+                <label><input type="checkbox" name="southCoastalDistrict" value="GUNTUR">Guntur</label>
+                <label><input type="checkbox" name="southCoastalDistrict" value="PALNADU">Palnadu</label>
+   <label><input type="checkbox" name="northCoastalDistrict" value="KRISHNA">Krishna</label>
+                <label><input type="checkbox" name="northCoastalDistrict" value="NTR">NTR</label>
+                <label><input type="checkbox" name="southCoastalDistrict" value="PRAKASAM">Prakasam</label>
+                <label><input type="checkbox" name="southCoastalDistrict" value="SRI POTTI SRIRAMULU NELLORE">Nellore</label>
+                <label><input type="checkbox" name="southCoastalDistrict" value="TIRUPATI">Tirupati</label>
+            </div>
+        </div>
+
+        <button id="generateMessage">Generate Message</button>
+        
+        <h2>Generated Message:</h2>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Function to generate the warning message
+        function generateWarningMessage() {
+            const northRainfallCategory = document.getElementById('northCoastalRainfallCategory').value;
+            const southRainfallCategory = document.getElementById('southCoastalRainfallCategory').value;
+            const northLocationCoverage = document.getElementById('northCoastalLocationCoverage').value;
+            const southLocationCoverage = document.getElementById('southCoastalLocationCoverage').value;
+
+            let messages = [];
+
+            // District lists
+            const northCoastalDistricts = [
+                "ALLURI SITHARAMA RAJU", "ANAKAPALLI", "EAST GODAVARI", "ELURU", "KAKINADA",
+                "Dr.B.R.AMBEDKAR KONASEEMA", "KRISHNA", "NTR", "PARVATHIPURAM MANYAM", 
+                "SRIKAKULAM", "VISAKHAPATNAM", "VIZIANAGARAM", "WEST GODAVARI", "YANAM"
+            ];
+            const southCoastalDistricts = [
+                "BAPATLA", "GUNTUR", "PALNADU", "PRAKASAM", "SRI POTTI SRIRAMULU NELLORE", "TIRUPATI"
+            ];
+
+            // North Coastal selected districts
+            const selectedNorthCoastalOptions = Array.from(document.querySelectorAll('input[name="northCoastalDistrict"]:checked'));
+            const selectedNorthCoastalDistricts = selectedNorthCoastalOptions.map(option => option.value);
+
+            // South Coastal selected districts
+            const selectedSouthCoastalOptions = Array.from(document.querySelectorAll('input[name="southCoastalDistrict"]:checked'));
+            const selectedSouthCoastalDistricts = selectedSouthCoastalOptions.map(option => option.value);
+
+            // Generate message based on category
+            const getCategoryMessage = (category) => {
+                switch (category) {
+                    case 'HEAVY':
+                        return 'HEAVY RAINFALL LIKELY TO OCCUR AT';
+                    case 'HEAVY_TO_VERY_HEAVY':
+                        return 'HEAVY TO VERY HEAVY RAINFALL LIKELY TO OCCUR AT';
+                    case 'EXTREME_HEAVY':
+                        return 'EXTREME HEAVY RAINFALL LIKELY TO OCCUR AT';
+                    default:
+                        return '';
+                }
+            };
+
+            const coverageText = {
+                'ONE_OR_TWO': 'ONE OR TWO PLACES OVER',
+                'FEW': 'FEW PLACES OVER',
+                'MANY': 'MANY PLACES OVER'
+            };
+
+            const northCategoryMessage = getCategoryMessage(northRainfallCategory);
+            const southCategoryMessage = getCategoryMessage(southRainfallCategory);
+
+            if (selectedNorthCoastalDistricts.length > 0) {
+                messages.push(`HEAVY RAINFALL WARNING: ${northCategoryMessage} ${coverageText[northLocationCoverage]} ${selectedNorthCoastalDistricts.join(', ')} DISTRICTS OF NORTH COASTAL ANDHRA PRADESH AND YANAM `);
+            }
+            if (selectedSouthCoastalDistricts.length > 0) {
+                messages.push(`${southCategoryMessage} ${coverageText[southLocationCoverage]} ${selectedSouthCoastalDistricts.join(', ')} DISTRICTS OF SOUTH COASTAL ANDHRA PRADESH`);
+            }
+
+            // Combine messages into final format
+            document.getElementById('result').innerText = messages.join(' AND ') + ' DURING NEXT 24 HOURS.';
+        }
+
+        // Attach event listener to the button
+        document.getElementById('generateMessage').addEventListener('click', generateWarningMessage);
+    </script>
+</body>
+</html>

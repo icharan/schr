@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            margin-right: 10px;
+        }
+        select, input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .districts {
+            margin-top: 10px;
+        }
+        .rainfall-category {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rainfall Warning System</h1>
+        
+        <label for="rainfallCategory">Select Rainfall Category:</label>
+        <select id="rainfallCategory">
+            <option value="heavy">Heavy Rainfall</option>
+            <option value="heavyToVeryHeavy">Heavy to Very Heavy Rainfall</option>
+            <option value="extremeHeavy">Extreme Heavy Rainfall</option>
+            <option value="moderate">Moderate Rainfall</option>
+            <option value="light">Light Rainfall</option>
+        </select>
+
+        <div class="rainfall-category" id="heavyRainfall">
+            <h3>Heavy Rainfall</h3>
+            <label for="heavyPlaceCount">LOCATION COVERAGE:</label>
+            <select id="heavyPlaceCount">
+                <option value="ONE OR TWO">ONE OR TWO</option>
+                <option value="FEW">FEW</option>
+                <option value="MANY">MANY</option>
+                <option value="ISOLATED">ISOLATED</option>
+            </select>
+            <label><input type="radio" name="heavyRegion" value="NORTH COASTAL"> NORTH COASTAL</label>
+            <label><input type="radio" name="heavyRegion" value="SOUTH COASTAL"> SOUTH COASTAL</label>
+            <div class="districts">
+                <label><input type="checkbox" name="heavyDistrict" value="SRIKAKULAM">SRIKAKULAM</label>
+                <!-- Add other districts here as before -->
+            </div>
+        </div>
+
+        <div class="rainfall-category" id="heavyToVeryHeavyRainfall" style="display: none;">
+            <h3>Heavy to Very Heavy Rainfall</h3>
+            <label for="heavyToVeryHeavyPlaceCount">LOCATION COVERAGE:</label>
+            <select id="heavyToVeryHeavyPlaceCount">
+                <option value="ONE OR TWO">ONE OR TWO</option>
+                <option value="FEW">FEW</option>
+                <option value="MANY">MANY</option>
+                <option value="ISOLATED">ISOLATED</option>
+            </select>
+            <label><input type="radio" name="heavyToVeryHeavyRegion" value="NORTH COASTAL"> NORTH COASTAL</label>
+            <label><input type="radio" name="heavyToVeryHeavyRegion" value="SOUTH COASTAL"> SOUTH COASTAL</label>
+            <div class="districts">
+                <label><input type="checkbox" name="heavyToVeryHeavyDistrict" value="SRIKAKULAM">SRIKAKULAM</label>
+                <!-- Add other districts here as before -->
+            </div>
+        </div>
+
+        <div class="rainfall-category" id="extremeHeavyRainfall" style="display: none;">
+            <h3>Extreme Heavy Rainfall</h3>
+            <label for="extremeHeavyPlaceCount">LOCATION COVERAGE:</label>
+            <select id="extremeHeavyPlaceCount">
+                <option value="ONE OR TWO">ONE OR TWO</option>
+                <option value="FEW">FEW</option>
+                <option value="MANY">MANY</option>
+                <option value="ISOLATED">ISOLATED</option>
+            </select>
+            <label><input type="radio" name="extremeHeavyRegion" value="NORTH COASTAL"> NORTH COASTAL</label>
+            <label><input type="radio" name="extremeHeavyRegion" value="SOUTH COASTAL"> SOUTH COASTAL</label>
+            <div class="districts">
+                <label><input type="checkbox" name="extremeHeavyDistrict" value="SRIKAKULAM">SRIKAKULAM</label>
+                <!-- Add other districts here as before -->
+            </div>
+        </div>
+
+        <div class="rainfall-category" id="moderateRainfall" style="display: none;">
+            <h3>Moderate Rainfall</h3>
+            <label for="moderatePlaceCount">LOCATION COVERAGE:</label>
+            <select id="moderatePlaceCount">
+                <option value="ONE OR TWO">ONE OR TWO</option>
+                <option value="FEW">FEW</option>
+                <option value="MANY">MANY</option>
+                <option value="ISOLATED">ISOLATED</option>
+            </select>
+            <label><input type="radio" name="moderateRegion" value="NORTH COASTAL"> NORTH COASTAL</label>
+            <label><input type="radio" name="moderateRegion" value="SOUTH COASTAL"> SOUTH COASTAL</label>
+            <div class="districts">
+                <label><input type="checkbox" name="moderateDistrict" value="SRIKAKULAM">SRIKAKULAM</label>
+                <!-- Add other districts here as before -->
+            </div>
+        </div>
+
+        <div class="rainfall-category" id="lightRainfall" style="display: none;">
+            <h3>Light Rainfall</h3>
+            <label for="lightPlaceCount">LOCATION COVERAGE:</label>
+            <select id="lightPlaceCount">
+                <option value="ONE OR TWO">ONE OR TWO</option>
+                <option value="FEW">FEW</option>
+                <option value="MANY">MANY</option>
+                <option value="ISOLATED">ISOLATED</option>
+            </select>
+            <label><input type="radio" name="lightRegion" value="NORTH COASTAL"> NORTH COASTAL</label>
+            <label><input type="radio" name="lightRegion" value="SOUTH COASTAL"> SOUTH COASTAL</label>
+            <div class="districts">
+                <label><input type="checkbox" name="lightDistrict" value="SRIKAKULAM">SRIKAKULAM</label>
+                <!-- Add other districts here as before -->
+            </div>
+        </div>
+
+        <button id="generateMessage">Generate Message</button>
+        
+        <h2>Generated Message:</h2>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Function to show or hide categories based on selection
+        document.getElementById('rainfallCategory').addEventListener('change', function() {
+            const selectedCategory = this.value;
+            document.getElementById('heavyRainfall').style.display = selectedCategory === 'heavy' ? 'block' : 'none';
+            document.getElementById('heavyToVeryHeavyRainfall').style.display = selectedCategory === 'heavyToVeryHeavy' ? 'block' : 'none';
+            document.getElementById('extremeHeavyRainfall').style.display = selectedCategory === 'extremeHeavy' ? 'block' : 'none';
+            document.getElementById('moderateRainfall').style.display = selectedCategory === 'moderate' ? 'block' : 'none';
+            document.getElementById('lightRainfall').style.display = selectedCategory === 'light' ? 'block' : 'none';
+        });
+
+        // Function to generate the warning message
+        function generateWarningMessage() {
+            const selectedCategory = document.getElementById('rainfallCategory').value;
+            let messages = [];
+
+            if (selectedCategory === 'heavy') {
+                const heavyPlaceCount = document.getElementById('heavyPlaceCount').value;
+                const selectedHeavyOptions = Array.from(document.querySelectorAll('input[name="heavyDistrict"]:checked'));
+                const selectedHeavyDistricts = selectedHeavyOptions.map(option => option.value);
+                const selectedHeavyRegion = document.querySelector('input[name="heavyRegion"]:checked')?.value || 'Not specified';
+
+                messages.push(`Heavy Rainfall Warning: ${heavyPlaceCount} in ${selectedHeavyRegion} districts: ${selectedHeavyDistricts.join(", ")}`);
+            } else if (selectedCategory === 'heavyToVeryHeavy') {
+                const heavyToVeryHeavyPlaceCount = document.getElementById('heavyToVeryHeavyPlaceCount').value;
+                const selectedHeavyToVeryHeavyOptions = Array.from(document.querySelectorAll('input[name="heavyToVeryHeavyDistrict"]:checked'));
+                const selectedHeavyToVeryHeavyDistricts = selectedHeavyToVeryHeavyOptions.map(option => option.value);
+                const selectedHeavyToVeryHeavyRegion = document.querySelector('input[name="heavyToVeryHeavyRegion"]:checked')?.value || 'Not specified';
+
+                messages.push(`Heavy to Very Heavy Rainfall Warning: ${heavyToVeryHeavyPlaceCount} in ${selectedHeavyToVeryHeavyRegion} districts: ${selectedHeavyToVeryHeavyDistricts.join(", ")}`);
+            } else if (selectedCategory === 'extremeHeavy') {
+                const extremeHeavyPlaceCount = document.getElementById('extremeHeavyPlaceCount').value;
+                const selectedExtremeHeavyOptions = Array.from(document.querySelectorAll('input[name="extremeHeavyDistrict"]:checked'));
+                const selectedExtremeHeavyDistricts = selectedExtremeHeavyOptions.map(option => option.value);
+                const selectedExtremeHeavyRegion = document.querySelector('input[name="extremeHeavyRegion"]:checked')?.value || 'Not specified';
+
+                messages.push(`Extreme Heavy Rainfall Warning: ${extremeHeavyPlaceCount} in ${selectedExtremeHeavyRegion} districts: ${selectedExtremeHeavyDistricts.join(", ")}`);
+            } else if (selectedCategory === 'moderate') {
+                const moderatePlaceCount = document.getElementById('moderatePlaceCount').value;
+                const selectedModerateOptions = Array.from(document.querySelectorAll('input[name="moderateDistrict"]:checked'));
+                const selectedModerateDistricts = selectedModerateOptions.map(option => option.value);
+                const selectedModerateRegion = document.querySelector('input[name="moderateRegion"]:checked')?.value || 'Not specified';
+
+                messages.push(`Moderate Rainfall Warning: ${moderatePlaceCount} in ${selectedModerateRegion} districts: ${selectedModerateDistricts.join(", ")}`);
+            } else if (selectedCategory === 'light') {
+                const lightPlaceCount = document.getElementById('lightPlaceCount').value;
+                const selectedLightOptions = Array.from(document.querySelectorAll('input[name="lightDistrict"]:checked'));
+                const selectedLightDistricts = selectedLightOptions.map(option => option.value);
+                const selectedLightRegion = document.querySelector('input[name="lightRegion"]:checked')?.value || 'Not specified';
+
+                messages.push(`Light Rainfall Warning: ${lightPlaceCount} in ${selectedLightRegion} districts: ${selectedLightDistricts.join(", ")}`);
+            }
+
+            return `Alert!<br>${messages.join("<br>")}`;
+        }
+
+        document.getElementById('generateMessage').addEventListener('click', function() {
+            const result = generateWarningMessage();
+            document.getElementById('result').innerHTML = result;
+        });
+    </script>
+</body>
+</html>

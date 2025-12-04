@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to Gmail</title>
+</head>
+<body>
+    <h1>Select Time for Bulletin</h1>
+    
+    <form id="dateTimeForm">
+                 <label for="bulletinType">Select Bulletin Type:</label>
+        <select id="bulletinType" name="bulletinType" required>
+            <option value="fishermenWarning">Fishermen Warning</option>
+            <option value="navtex">Navtex Bulletin</option>
+            <option value="changeChart">Change Chart</option>
+            <option value="lfc">LFC</option>
+            <option value="Mnginference">MngInference</option>
+            <option value="Eveinference">EveInference</option>
+            <option value="03heavyRainfall">03Heavy Rainfall Warning</option>
+            <option value="12heavyRainfall1">12Heavy Rainfall Warning1</option>
+            <option value="03strongwind">03strongwind Warning</option>
+            <option value="12strongwind">12strongwind Warning1</option>
+            <option value="PORTWARNING">PORTWarning</option>
+            <option value="PORTWARNING1">PORTWarning1</option>
+                            
+        </select>
+        
+        <br><br>
+        
+                        <label for="timeSelect">Select Time:</label>
+        <select id="timeSelect" name="time" required>
+                            </select>
+        
+        <br><br>
+        
+        <button type="submit">Go to Gmail</button>
+    </form>
+
+    <script>
+    
+        const today = new Date();
+        const dayOfMonth = String(today.getDate()).padStart(2, '0'); // Ensure two digits (e.g., 13)
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Ensure two digits (e.g., 12)
+        const year = today.getFullYear(); // Full year (e.g., 2024)
+        const formattedDate = `${dayOfMonth}.${month}.${year}`; // Format the date as DD.MM.YYYY
+
+        // Function to populate time options based on selected bulletin type
+        const updateTimeOptions = () => {
+            const bulletinType = document.getElementById('bulletinType').value;
+            const timeSelect = document.getElementById('timeSelect');
+            timeSelect.innerHTML = ''; // Clear existing options
+
+            let options = [];
+
+            if (bulletinType === 'fishermenWarning') {
+                // Show IST times for Fishermen Warning
+                options = [
+                    { value: '1330', label: '1330 HRS IST' },
+                    { value: '0600', label: '0600 HRS IST' },
+                    { value: '1800', label: '1800 HRS IST' },
+                    { value: '2300', label: '2300 HRS IST' }
+                ];
+            } else if (bulletinType === 'heavyRainfall') {
+                options = [
+                    { value: '0300', label: '0300 UTC' },
+                    { value: '1200', label: '1200 UTC' }
+                ];
+            }
+            else {
+                // Show UTC times for Navtex, Change Chart, and LFC
+                options = [
+                    { value: '0300', label: '0300 UTC' },
+                    { value: '1200', label: '1200 UTC' }
+                ];
+            }
+
+            // Add the new options to the select dropdown
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.value;
+                optionElement.textContent = option.label;
+                timeSelect.appendChild(optionElement);
+            });
+        };
+
+        // Event listener to update the time options when the bulletin type is changed
+        document.getElementById('bulletinType').addEventListener('change', updateTimeOptions);
+
+        // Initial call to populate time options
+        updateTimeOptions();
+
+        // Handle form submission
+        document.getElementById('dateTimeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            // Get the selected bulletin type and time
+            const bulletinType = document.getElementById('bulletinType').value;
+            const selectedTime = document.getElementById('timeSelect').value;
+            
+            if (selectedTime && bulletinType) {
+                let subject, body, toRecipients;
+                
+                // Encode the subject and body properly to ensure they are URL-safe
+                const encodeMessage = (message) => encodeURIComponent(message).replace(/%0A/g, '%0D%0A');
+                
+              if (bulletinType === 'navtex') {
+    // Navtex bulletin
+    subject = encodeMessage(`${dayOfMonth}/${selectedTime} UTC BASED COASTAL BULLETIN FOR ANDHRA COAST`);
+    body = encodeMessage(`SIR/MADAM,\n\nKINDLY FIND THE ATTACHMENT\n\n===`);
+    toRecipients = encodeURIComponent("kkb_dgll@nic.in," +
+                                       "Cyclone Warning Division <cwdhq2008@gmail.com>," +
+                                       "maintenance.navtex@gmail.com," +
+                                       "dgll light <dgllnoida@gmail.com>," +
+                                       "DGLL NOIDA <noida-dgll@nic.in>," +
+                                       "monica sharma <moniimd@gmail.com>," +
+                                       "\"MONICA SHARMA S.A.,India Meteorological Department\" <monica.sharma@imd.gov.in>," +                                    
+                                       "SANKAR NATH <sankar.nath@imd.gov.in>," +
+                                       "SANKAR NATH <saulnov07@gmail.com>," +
+                                       "ISSD <rthnewdelhi4@gmail.com>," +
+                                       "amit.bhardwaj.imd@gmail.com," +
+                                       "navtexissd@gmail.com," +
+                                       "murty.iitd@gmail.com");
+}      else if (bulletinType === 'PORTWARNING') {
+    // Navtex bulletin
+    subject = encodeMessage(`${dayOfMonth}/${selectedTime} UTC BASED PORT WARNINGS`);
+    body = encodeMessage(`SIR/MADAM,\n\nKINDLY FIND THE ATTACHMENT\n\n===`);
+    toRecipients = encodeURIComponent(
+  "b.venkatarao1968@gmail.com," +
+  "dc.vpt@gov.in," +
+  "dc@gangavaram.com," +
+  "dc@vizagport.com," +
+  "portofficekkd@gmail.com," +
+  "portofficerkkd@gmail.com," +
+  "vizag port <dcvizagport@gmail.com>," +
+  "VR RAO <po.mtmport@gmail.com>," +
+  "krishnapatnamportcontrol@krishnapatnam.com"
+);
+}else if (bulletinType === 'changeChart') {
+                    // Change chart bulletin
+                    subject = encodeMessage(`CHANGE CHART DATED ${formattedDate} / ${selectedTime} UTC`);
+                    body = encodeMessage(`SIR/MADAM,\n\nKINDLY FIND THE ATTACHMENT\n\n===`);                    
+                    toRecipients = encodeURIComponent("ACWC RMC CHENNAI <acwctp@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,S STELLA IMD <mcamaravati.ws@imd.gov.in>");
+                } else if (bulletinType === 'lfc') {
+                    // LFC bulletin
+                    subject = encodeMessage(`LFC OF VSK DATED ${formattedDate} / ${selectedTime} UTC`);
+                    body = encodeMessage(`SIR / MADAM,\n\nKINDLY FIND THE ATTACHMENT\n\n===`);
+                    toRecipients = encodeURIComponent("mc.amaravati@gmail.com,apdata2021@gmail.com,mcamaravati.ws@imd.gov.in");
+                } else if (bulletinType === 'fishermenWarning') {
+    // Fishermen Warning bulletin with dynamic body content based on the selected time
+    let timeBody;
+
+    if (selectedTime === '1330') {
+        timeBody = `AAMA23 VOVZ ${dayOfMonth}0700`;
+    } else if (selectedTime === '0600') {
+        timeBody = `AAMA23 VOVZ ${dayOfMonth}0000`;
+    } else if (selectedTime === '1800') {
+        timeBody = `AAMA23 VOVZ ${dayOfMonth}1200`;
+    } else if (selectedTime === '2300') {
+        timeBody = `AAMA23 VOVZ ${dayOfMonth}1500`;
+    }
+
+    subject = encodeMessage(`${selectedTime} HRS IST FISHERMEN WARNING DATED: ${formattedDate}`);
+    body = encodeMessage(`${timeBody}\nFROM CWC VISAKHAPATNAM\nTO ACWC CHENNAI/MC HYD/MC AMR/AIR CDP/AIR VSK/AIR HYD/AIR VJW/FISHERIES`);
+    toRecipients = encodeURIComponent("APDATA 2021 <apdata2021@gmail.com>," +                                    
+                                       "jdFisheriesskl@gmail.com," +
+                                       "jdFisheriesvizag@gmail.com," +
+                                       "Dr Sourav Maity <sourav.maity.ocean@gmail.com>," +
+                                       "souravm@incois.gov.in," +
+                                       "swetha@incois.gov.in," +
+                                       "ACWC RMC CHENNAI <acwctp@gmail.com>," +
+                                       "AIR VISAKHAPATNAM <dutyroomvsp@gmail.com>," +
+                                       "airhyd <airhyd@hotmail.com>," +
+                                       "All India Radio Visakhapatnam <airpcvsp@gmail.com>," +
+                                       "Amaravati Met Centre <mc.amaravati@gmail.com>," +
+                                       "AMSS Chennai <amsschennai@gmail.com>," +
+                                       "APSDMA SEOC <seoc-apsdma@ap.gov.in>," +
+                                       "Assistant Director of Fisheries Viziangaram <adfvzn@gmail.com>," +
+                                       "Assistdirector Fisheries <adfyanam@gmail.com>," +
+                                       "\"Asst. Director of Fisheries Ongole\" <adfisheriesongole@gmail.com>," +
+                                       "\"Commr. of Fisheries, A.P.\" <comfishap@gmail.com>," +
+                                       "Ddf Guntur <gtrddf@gmail.com>," +
+                                       "JDF Kakinada <jdfishkkd@gmail.com>," +
+                                       "JDF Nellore <jdfisheriesnlr@gmail.com>," +
+                                       "JDF Visakhapatnam <jdfisheriesvsp@gmail.com>," +
+                                       "\"kadaparadio@gmail.com\" <kadaparadio@gmail.com>," +
+                                       "Krishna JDF <krishnadd.fisheries@gmail.com>," +
+                                       "nellore fmradio <fmradionellore4@gmail.com>," +
+                                       "PFZ INCOIS <pfzmission@gmail.com>," +
+                                       "RNU Correspondent <correspondentrnuhyd@gmail.com>," +
+                                       "S STELLA IMD <mcamaravati.ws@imd.gov.in>," +
+                                       "Vijayawada Akashvani <sdairvja@gmail.com>," +
+                                       "Lavanya707@gmail.com," +
+                                       "comfish-ap@ap.gov.in," +
+                                       "Icr-er@mha.gov.in");
+} else if (bulletinType === 'Mnginference') {
+    subject = encodeMessage(`VSK MNG INF AND DOB DATED: ${formattedDate}`);
+    
+    body = encodeMessage(`AXIN90 VOVZ ${dayOfMonth}${selectedTime}
+FROM CWC VISAKHAPATNAM
+TO ALL CONCERNED
+
+VSK MNG INF DATED: ${formattedDate}
+
+
+
+===
+
+AAMD23 VOVZ ${dayOfMonth}${selectedTime}
+
+FROM CWC VISAKHAPATNAM
+
+TO ACWC CHENNAI (FOR TRANSMISSION TO COASTAL RADIO, CHENNAI)
+
+SYNOPTIC SITUATION:  NIL
+
+DAILY ONE BULLETIN FOR NORTH AND SOUTH ANDHRA COAST FORECAST VALID FOR NEXT 12 HRS FROM ${dayOfMonth}/0900 UTC:
+
+
+
+===
+
+AACC23 VOVZ ${dayOfMonth}${selectedTime}
+
+FROM CWC VISAKHAPATNAM
+
+TO ACWC KOLKATTA (FOR TRANSMISSION TO COASTAL RADIO, KOLKATTA)
+
+SYNOPTIC SITUATION:  NIL
+
+DAILY ONE BULLETIN FOR NORTH AND SOUTH ANDHRA COAST FORECAST VALID FOR NEXT 12 HRS FROM ${dayOfMonth}/0900 UTC:
+
+
+
+===`);
+
+    toRecipients = encodeURIComponent(`ACWC RMC Chennai <acwctp@gmail.com>,AMSS Chennai <amsschennai@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,APDATA 2021 <apdata2021@gmail.com>,Cd Met HQENC <cdmet.hqenc@gmail.com>,S Stella IMD <mcamaravati.ws@imd.gov.in>`);
+}
+ else if (bulletinType === 'Eveinference') {
+                    subject = encodeMessage(`VSK EVE INF AND DTB DATED: ${formattedDate}`);
+                    body = encodeMessage(`AXIN90 VOVZ ${dayOfMonth}${selectedTime}\nFROM CWC VISAKHAPATNAM\nTO ALL CONCERNED\n\nVSK EVE INF DATED: ${formattedDate}
+
+===
+
+AAMD23 VOVZ ${dayOfMonth}${selectedTime}
+
+FROM CWC VISAKHAPATNAM
+
+TO ACWC CHENNAI (FOR TRANSMISSION TO COASTAL RADIO, CHENNAI)
+
+SYNOPTIC SITUATION:  NIL
+
+DAILY TWO BULLETIN FOR NORTH AND SOUTH ANDHRA COAST FORECAST VALID FOR NEXT 12 HRS FROM ${dayOfMonth}/2100 UTC:
+
+
+
+===
+
+AACC23 VOVZ ${dayOfMonth}${selectedTime}
+
+FROM CWC VISAKHAPATNAM
+
+TO ACWC KOLKATTA (FOR TRANSMISSION TO COASTAL RADIO, KOLKATTA)
+
+SYNOPTIC SITUATION:  NIL
+
+DAILY TWO BULLETIN FOR NORTH AND SOUTH ANDHRA COAST FORECAST VALID FOR NEXT 12 HRS FROM ${dayOfMonth}/2100 UTC:
+
+
+`);
+                     toRecipients = encodeURIComponent(`ACWC RMC Chennai <acwctp@gmail.com>,AMSS Chennai <amsschennai@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,APDATA 2021 <apdata2021@gmail.com>,Cd Met HQENC <cdmet.hqenc@gmail.com>,S Stella IMD <mcamaravati.ws@imd.gov.in>`);
+                } else if (bulletinType === '03heavyRainfall') {
+                    subject = encodeMessage(`HEAVY RAINFALL WARNING DT: ${formattedDate}`);
+                    body = encodeMessage(`BDDR50 VOVZ ${dayOfMonth}${selectedTime}\nFROM CWC VISAKHAPATNAM\nTO ACWC CHENNAI AND CONCERNED`);
+                    toRecipients = encodeURIComponent(`MetCentre Amaravati IMD <mcamaravati.ws@imd.gov.in>,ACWC RMC CHENNAI <acwctp@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,AMSS Chennai <amsschennai@gmail.com>,APDATA 0101 <apdata0101@gmail.com>,nwfc weather <wxchannel1@gmail.com>,NwfcNewDelhi<rainfallnwfc@gmail.com>,Nowcast Division <nowcastnwfc@gmail.com>,Nowcast Division <nowcastdivision@gmail.com>`);
+                } else if (bulletinType === '12heavyRainfall1') {
+                    subject = encodeMessage(`HEAVY RAINFALL WARNING DT: ${formattedDate}`);
+                    body = encodeMessage(`SIR/MADAM,\n\nPLEASE FIND THE ATTACHMENT.\n\n===`);
+                    toRecipients = encodeURIComponent(`cs@ap.gov.in,ECoR CPRO <cpro.ecor@gmail.com>,APSDMA SEOC <seoc-apsdma@ap.gov.in>`);
+                }else if (bulletinType === '03strongwind') {
+                    subject = encodeMessage(`${dayOfMonth}/${selectedTime} UTC BASED STRONG WINDS`);
+                    body = encodeMessage(`BDDR50 VOVZ ${dayOfMonth}${selectedTime}\nFROM CWC VISAKHAPATNAM\nTO ACWC CHENNAI AND CONCERNED\n\nSTRONG WINDS BASED ON ${selectedTime} UTC DATED ${formattedDate}: \n \nSTRONG WINDS: SQUALLY WEATHER WITH WIND SPEED REACHING 35-45 KMPH GUSTING TO 55 KMPH LIKELY TO PREVAIL ALONG AND OFF ANDHRA PRADESH COAST AND YANAM DURING NEXT 24 HOURS. \n\nTHE FOLLOWING ALBUM PAGE WARNEES ARE WARNED FOR STRONG WINDS BASED ON ${dayOfMonth}/${selectedTime}UTC:\n\nFISHERIES: 26, 27, 29 TO 34.\n\n===`);
+                    toRecipients = encodeURIComponent(`ACWC RMC CHENNAI <acwctp@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,mcamaravathi.ws@imd.gov.in,AMSS Chennai <amsschennai@gmail.com>,APDATA 0101 <apdata0101@gmail.com>,nwfc weather <wxchannel1@gmail.com>,NwfcNewDelhi<rainfallnwfc@gmail.com>`);
+                }else if (bulletinType === 'PORTWARNING1') {
+                    subject = encodeMessage(`​PORT WARNINGS BASED ON ${dayOfMonth}/${selectedTime} UTC`);
+                    body = encodeMessage(`BDDR50 VOVZ ${dayOfMonth}${selectedTime}\nFROM: CWC VISAKHAPATNAM\nTO: ACWC CHENNAI / MC AMARAVATI / DDGM (WF) PUNE/ DDGM(CW) NEW DELHI\n\nPORT WARNINGS BASED ON ${formattedDate}/ ${selectedTime} UTC : \n \n\n\n===`);
+                    toRecipients = encodeURIComponent(`ACWC RMC CHENNAI <acwctp@gmail.com>,Amaravati Met Centre <mc.amaravati@gmail.com>,mcamaravathi.ws@imd.gov.in,AMSS Chennai <amsschennai@gmail.com>,APDATA 0101 <apdata0101@gmail.com>,nwfc weather <wxchannel1@gmail.com>,NwfcNewDelhi<rainfallnwfc@gmail.com>,S STELLA IMD <MCAMARAVATI.WS@imd.gov.in>`);
+                } else if (bulletinType === '12strongwind') {
+                    subject = encodeMessage(`${dayOfMonth}/${selectedTime} UTC BASED STRONG WINDS`);
+                    body = encodeMessage(`FROM CYCLONE WARNING CENTRE, VISAKHAPATNAM:\n\nSTRONG WINDS BASED ON ${selectedTime} UTC DATED ${formattedDate}:\n\nSTRONG WINDS: SQUALLY WEATHER WITH WIND SPEED REACHING 35-45 KMPH GUSTING TO 55 KMPH ALONG AND OFF OFF YOUR COAST TILL 22th MAY 2025 MORNING.\n\nSIR/MADAM,\n\nPLEASE FIND THE ATTACHMENT.\n\n===`);
+                    toRecipients = encodeURIComponent(`comfish-ap@ap.gov.in,jdFisheriesskl@gmail.com,jdFisheriesvizag@gmail.com,Assistant Director of Fisheries Viziangaram <adfvzn@gmail.com>,Assistdirector Fisheries <adfyanam@gmail.com>,"Asst. Director of Fisheries Ongole" <adfisheriesongole@gmail.com>,"Commr. of Fisheries, A.P." <comfishap@gmail.com>,Ddf Guntur <gtrddf@gmail.com>,JDF Kakinada <jdfishkkd@gmail.com>,JDF Nellore <jdfisheriesnlr@gmail.com>,JDF Visakhapatnam <jdfisheriesvsp@gmail.com>,Krishna JDF <krishnadd.fisheries@gmail.com>,YAKUB BASHA <bashaddf@gmail.com>`);
+                }
+                // Construct the Gmail URL with the selected subject, body, and recipients
+                const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${toRecipients}&su=${subject}&body=${body}`;
+
+                // Open the Gmail URL in a new tab
+                window.open(gmailUrl, '_blank');
+            } else {
+                alert('Please select both a bulletin type and time.');
+            }
+        });
+    </script>
+    <footer style="text-align: right;">
+        <p>𝓢𝓪𝓲𝓬𝓱𝓪𝓻𝓪𝓷</p>
+    </footer>
+</body>
+</html>

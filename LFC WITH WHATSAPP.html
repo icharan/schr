@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCAL FORECAST</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group input.large, .form-group select.large {
+            width: 100%;
+        }
+        .form-group input.small, .form-group select.small {
+            width: 70%;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px; /* Added margin between buttons */
+        }
+        #result {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .hidden {
+            display: none;
+        }
+        .horizontal-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Reduced gap between form-group elements */
+        }
+        .horizontal-group .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        .form-group.date-group,
+        .form-group.time-group {
+            flex: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="weatherForm">
+        <div class="form-group">
+            <label for="timeOfDay">Select Time of Day:</label>
+            <select id="timeOfDay" name="timeOfDay" required>
+                <option value="SELECT">SELECT</option>
+                <option value="MORNING">MORNING</option>
+                <option value="AFTERNOON">AFTERNOON</option>
+                <option value="EVENING">EVENING</option>
+                <option value="NIGHT">NIGHT</option>
+            </select>
+        </div>
+
+        <div class="form-group hidden" id="datetime-group">
+            <label for="forecastDate">Select Date:</label>
+            <input type="date" id="forecastDate" name="forecastDate" required>
+            <label for="forecastTime">Select Time:</label>
+            <select id="forecastTime" name="forecastTime" required>
+                <option value="0300">0300</option>
+                <option value="1200">1200</option>
+            </select>
+        </div>
+        
+        <div class="horizontal-group">
+            <div class="form-group">
+                <label for="cloudCover">Select Cloud Cover:</label>
+                <select id="cloudCover" name="cloudCover" required>
+                    <option value="SELECT">SELECT</option>
+                    <option value="GENERALLY CLOUDY">GENERALLY CLOUDY</option>
+                    <option value="PARTLY CLOUDY">PARTLY CLOUDY</option>                 
+                    <option value="OVERCAST">OVERCAST</option>
+                    <option value="MAINLY CLEAR">MAINLY CLEAR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="rainType">Select Type of Rain:</label>
+                <select id="rainType" name="rainType" required>
+                    <option value="SELECT">SELECT</option>
+                    <option value="DRIZZLE">DRIZZLE</option>
+                    <option value="A SPELL OF RAIN/DRIZZLE">A SPELL OF RAIN/DRIZZLE</option>
+                    <option value="A SPELL OF RAIN/THUNDERSHOWERS">A SPELL OF RAIN/THUNDERSHOWERS</option>
+                    <option value="ONE OR TWO SPELLS OF RAIN/DRIZZLE">ONE OR TWO SPELLS OF RAIN/DRIZZLE</option>
+                    <option value="ONE OR TWO SPELLS OF RAIN/THUNDERSHOWERS">ONE OR TWO SPELLS OF RAIN/THUNDERSHOWERS</option>
+                    <option value="A FEW SPELLS OF RAIN/THUNDERSHOWERS">A FEW SPELLS OF RAIN/THUNDERSHOWERS</option>
+                    <option value="WITH HAZE">WITH HAZE</option>
+                    <option value="WITH HAZE/MIST">WITH HAZE/MIST</option>
+                    <option value="WITH INTERMITTENT RAIN OR DRIZZLE">WITH INTERMITTENT RAIN OR DRIZZLE</option>
+                    <option value="WITH INTERMITTENT RAIN OR THUNDERSHOWERS AT TIMES HEAVY">WITH INTERMITTENT RAIN OR THUNDERSHOWERS AT TIMES HEAVY</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="occurrence">Select Type of OCCURRENCE:</label>
+                <select id="occurrence" name="occurrence" required>
+                    <option value="SELECT">SELECT</option>
+                    <option value="OCCUR">OCCUR</option>
+                    <option value="PREVAIL">PREVAIL</option>                      
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h2>WLT (43150)</h2>
+            <label for="wlt-max-temp">Maximum Temperature (°C):</label>
+            <input type="number" id="wlt-max-temp" name="wlt-max-temp" step="0.1" required>
+            <label for="wlt-min-temp">Minimum Temperature (°C):</label>
+            <input type="number" id="wlt-min-temp" name="wlt-min-temp" step="0.1" required>
+            <label for="wlt-rainfall">Rainfall (mm):</label>
+            <input type="text" id="wlt-rainfall" name="wlt-rainfall" placeholder="mm" required>
+            <label for="wlt-rh" id="wlt-rh-label" class="hidden">Relative Humidity (%):</label>
+            <input type="number" id="wlt-rh" name="wlt-rh" step="1" class="hidden">
+        </div>
+        
+        <div class="form-group">
+            <h2>VSK (43149)</h2>
+            <label for="vsk-max-temp">Maximum Temperature (°C):</label>
+            <input type="number" id="vsk-max-temp" name="vsk-max-temp" step="0.1" required>
+            <label for="vsk-min-temp">Minimum Temperature (°C):</label>
+            <input type="number" id="vsk-min-temp" name="vsk-min-temp" step="0.1" required>
+            <label for="vsk-rainfall">Rainfall (mm):</label>
+            <input type="text" id="vsk-rainfall" name="vsk-rainfall" placeholder="mm" required>
+            <label for="vsk-rh" id="vsk-rh-label" class="hidden">Relative Humidity (%):</label>
+            <input type="number" id="vsk-rh" name="vsk-rh" step="1" class="hidden">
+        </div>
+
+        <div class="form-group">
+            <button type="button" onclick="generateMessage()">Submit</button>
+            <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+            <button type="button" onclick="sendToWhatsApp()">Send to WhatsApp</button>
+            <button type="button" onclick="sendToGmail()">Send to Gmail</button>
+        </div>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('timeOfDay').addEventListener('change', function() {
+            const timeOfDay = this.value;
+            const forecastTime = document.getElementById('forecastTime');
+            const isVisible = timeOfDay === 'MORNING' || timeOfDay === 'EVENING';
+            
+            // Show or hide fields based on time of day
+            document.querySelectorAll('#wlt-rh, #wlt-rh-label, #vsk-rh, #vsk-rh-label').forEach(field => {
+                field.classList.toggle('hidden', !isVisible);
+            });
+            document.getElementById('datetime-group').classList.toggle('hidden', !isVisible);
+            
+            // Automatically select time based on time of day
+            if (timeOfDay === 'MORNING') {
+                forecastTime.value = '0300';
+            } else if (timeOfDay === 'EVENING') {
+                forecastTime.value = '1200';
+            }
+        });
+
+        function generateMessage() {
+            const timeOfDay = document.getElementById('timeOfDay').value;
+            const cloudCover = document.getElementById('cloudCover').value;
+            const rainType = document.getElementById('rainType').value;
+            const occurrence = document.getElementById('occurrence').value;
+            const wltRainfall = document.getElementById('wlt-rainfall').value;
+            const vskRainfall = document.getElementById('vsk-rainfall').value;
+            const wltMaxTemp = document.getElementById('wlt-max-temp').value;
+            const wltMinTemp = document.getElementById('wlt-min-temp').value;
+            const vskMaxTemp = document.getElementById('vsk-max-temp').value;
+            const vskMinTemp = document.getElementById('vsk-min-temp').value;
+
+            const forecastDate = document.getElementById('forecastDate').value;
+            const forecastTime = document.getElementById('forecastTime').value;
+            
+            // Format date as DD-MM-YYYY
+            const dateParts = forecastDate.split('-');
+            const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // DD-MM-YYYY
+            const formattedTime = forecastTime; // Time (HHMM)
+            const dateTimeCode = `${dateParts[2]}${forecastTime}`; // DDHHMM
+            
+            let message;
+
+            if (timeOfDay === 'NIGHT' || timeOfDay === 'AFTERNOON') {
+                message = `LOCAL FORECAST OF VISAKHAPATNAM AND NEIGHBOURHOOD:
+
+
+${cloudCover} SKY WITH ${rainType} LIKELY TO ${occurrence}.
+
+PARAMETERS     : MAX  /   MIN    /  RAINFALL
+
+WLT (43150)    :   ${wltMaxTemp} /   ${wltMinTemp}  /   ${wltRainfall}
+     
+VSK (43149)    :   ${vskMaxTemp} /   ${vskMinTemp}  /   ${vskRainfall}
+
+===`;
+            } else {
+                const wltRH = document.getElementById('wlt-rh').value;
+                const vskRH = document.getElementById('vsk-rh').value;
+
+                message = `LOCAL FORECAST OF VSK & N/Hood DATED ${formattedDate} / ${forecastTime} UTC.
+
+ACWC RMC CHENNAI <acwctp@gmail.com>,
+amsschennai<amsschennai@gmail.com>,
+Amaravati Met Centre <mc.amaravati@gmail.com>,
+S STELLA IMD <mcamaravati.ws@imd.gov.in>,
+APDATA 2021 <apdata2021@gmail.com>
+
+AAIN23 VOVZ ${dateTimeCode}
+FROM CWC VISAKHAPATNAM
+TO NHAC NEW DELHI
+
+LOCAL FORECAST OF VISAKHAPATNAM AND NEIGHBORHOOD:
+
+${cloudCover} SKY WITH ${rainType} LIKELY TO ${occurrence}.
+
+PARAMETERS     : MAX  /   MIN    /  RAINFALL  /   RH
+
+WLT (43150)    :   ${wltMaxTemp} /   ${wltMinTemp}  /    ${wltRainfall}  /   ${wltRH}
+     
+VSK (43149)    :   ${vskMaxTemp} /   ${vskMinTemp}  /   ${vskRainfall}  /   ${vskRH}
+
+===`;
+            }
+
+            document.getElementById('result').textContent = message;
+            return message;
+        }
+
+        function copyToClipboard() {
+            const resultText = document.getElementById('result').textContent;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(resultText).then(() => {
+                    alert('Forecast message copied to clipboard!');
+                }).catch(err => {
+                    alert('Failed to copy text: ' + err);
+                });
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = resultText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('Forecast message copied to clipboard!');
+                } catch (err) {
+                    alert('Failed to copy text: ' + err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function sendToWhatsApp() {
+            const message = encodeURIComponent(generateMessage());
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function sendToGmail() {
+            const subject = encodeURIComponent('Weather Forecast');
+            const body = encodeURIComponent(generateMessage());
+            window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+        }
+    </script>
+</body>
+</html>

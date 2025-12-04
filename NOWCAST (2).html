@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOWCAST MESSAGE</title>
+       <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 16px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: GREEN;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: BLACK;
+        }
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .button-group button {
+            width: 32%;
+            font-size: 14px;
+            padding: 10px;
+            display: inline-block;
+        }
+        .button-group i {
+            margin-right: 5px;
+        }
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .footer img {
+            width: 200px;
+        }
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="weatherAlertForm">
+<div class="form-group">
+            <label for="alertDate">Date</label>
+            <input type="date" id="alertDate" required>
+        </div>
+        <div class="form-group">
+            <label for="alertTime">Time (24-hour format)</label>
+            <input type="time" id="alertTime" required>
+        </div>
+        <div class="form-group checkbox-group">
+            <label>Districts</label><br>
+             <label><input type="checkbox" name="district" value="SRIKAKULAM">SRIKAKULAM</label>
+             <label><input type="checkbox" name="district" value="PARVATHIPURAM MANYAM">PARVATHIPURAM MANYAM</label>
+             <label><input type="checkbox" name="district" value="VIZIANAGARAM">VIZIANAGARAM</label>
+            <label><input type="checkbox" name="district" value="VISAKHAPATNAM">VISAKHAPATNAM</label> 
+            <label><input type="checkbox" name="district" value="ALLURI SITHARAMA RAJU">ALLURI SITHARAMA RAJU</label>
+            <label><input type="checkbox" name="district" value="ANAKAPALLI">ANAKAPALLI</label>
+            <label><input type="checkbox" name="district" value="KAKINADA">KAKINADA</label>
+            <label><input type="checkbox" name="district" value="YANAM">YANAM</label>
+            <label><input type="checkbox" name="district" value="Dr.B.R.AMBEDKAR KONASEEMA">Dr.B.R.AMBEDKAR KONASEEMA</label>
+            <label><input type="checkbox" name="district" value="EAST GODAVARI">EAST GODAVARI</label>
+            <label><input type="checkbox" name="district" value="WEST GODAVARI">WEST GODAVARI</label>
+            <label><input type="checkbox" name="district" value="ELURU">ELURU</label>
+            <label><input type="checkbox" name="district" value="NTR">NTR</label>
+            <label><input type="checkbox" name="district" value="KRISHNA">KRISHNA</label>
+            <label><input type="checkbox" name="district" value="GUNTUR">GUNTUR</label>
+            <label><input type="checkbox" name="district" value="PALNADU">PALNADU</label>
+            <label><input type="checkbox" name="district" value="BAPATLA">BAPATLA</label>
+            <label><input type="checkbox" name="district" value="PRAKASAM">PRAKASAM</label>
+            <label><input type="checkbox" name="district" value="SRI POTTI SRIRAMULU NELLORE">SRI POTTI SRIRAMULU NELLORE</label>
+            <label><input type="checkbox" name="district" value="CHITTOOR">CHITTOOR</label>
+            <label><input type="checkbox" name="district" value="TIRUPATI">TIRUPATI</label>
+            <label><input type="checkbox" name="district" value="ANNAMAYYA">ANNAMAYYA</label>
+            <label><input type="checkbox" name="district" value="YSR KADAPA">YSR KADAPA</label>
+            <label><input type="checkbox" name="district" value="KURNOOL">KURNOOL</label>
+            <label><input type="checkbox" name="district" value="NANDYAL">NANDYAL</label>
+            <label><input type="checkbox" name="district" value="SRI SATHYA SAI">SRI SATHYA SAI</label>
+            <label><input type="checkbox" name="district" value="ANANTAPUR">ANANTAPUR</label>
+        </div>
+          <div class="form-group">
+            <label for="AlertType">Type of alert</label>
+            <select id="AlertType" required>
+                <option value="">Select...</option>
+                <option value="(YELLOW ALERT: BE UPDATED)">YELLOW ALERT</option>
+                <option value="(ORANGE ALERT: BE PREPARED TO TAKE ACTION)">ORANGE ALERT</option>
+                <option value="(RED ALERT: TAKE ACTION)">RED ALERT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="thunderstormIntensity">Thunderstorm Intensity</label>
+            <select id="thunderstormIntensity" required>
+                <option value="">Select...</option>
+                <option value="Light">Light</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Severe">Severe</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="lightningLikelihood">Lightning Likelihood</label>
+            <select id="lightningLikelihood" required>
+                <option value="">Select...</option>
+                <option value="likely">likely</option>
+                <option value="very likely">very likely</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="locationCoverage">Location Coverage</label>
+            <select id="locationCoverage" required>
+                <option value="">Select...</option>
+                <option value="one or two places">one or two places</option>
+                <option value="a few places">a few places</option>
+                <option value="many places">many places</option>
+                <option value="most places">most places</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="windDescription">Wind Description</label>
+            <select id="windDescription" required>
+                <option value="">Select...</option>
+                <option value="gusty winds">strong gusty winds</option>
+                <option value="gusty/squally winds">squally winds</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="windSpeed">Wind Speed</label>
+            <select id="windSpeed" required>
+                <option value="">Select...</option>
+                <option value="30-40 kmph">30-40 kmph</option>
+                <option value="40-50 kmph">40-50 kmph</option>
+                <option value="50-60 kmph">50-60 kmph</option>
+                <option value="60-70 kmph">60-70 kmph</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rainfallIntensity">Rainfall Intensity</label>
+            <select id="rainfallIntensity" required>
+                <option value="">Select...</option>
+                <option value="light rainfall">light</option>
+                <option value="moderate rainfall">moderate</option>
+                <option value="heavy rainfall">heavy</option>
+                <option value="heavy rainfall with possibility of hail">heavy hail</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <button type="button" onclick="generateBothAlerts()">Generate Messages for both WhatsApp(without Email id's) & Gmail(with mail id's)</button>
+        </div>
+    </form>
+    <div id="alertWithoutEmails" class="alert" style="display: none;"></div>
+    <div class="button-group" id="firstAlertButtons" style="display: none;">
+        <button onclick="copyToClipboard('alertWithoutEmails')"><i class="fas fa-copy"></i> Copy Message for Whatsapp</button>
+        <button onclick="shareOnWhatsApp('alertWithoutEmails')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+    </div>
+    <div id="alertWithEmails" class="alert" style="display: none;"></div>
+    <div class="button-group" id="secondAlertButtons" style="display: none;">
+        <button onclick="copyToClipboard('alertWithEmails')"><i class="fas fa-copy"></i> Copy Message for Gmail</button>
+        <button onclick="sendViaGmail('alertWithEmails')"><i class="fas fa-envelope"></i> Gmail</button>
+    </div>
+    <div class="footer" style="text-align: center; padding: 5px;">
+        <p style="margin: 0;">
+            <span style="float: right;"><b>꧁<i>SAI CHARAN</i>꧂</b></span>
+        </p>
+    </div>
+    <script>
+        function formatDateString(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear().toString(); 
+            return `${day}-${month}-${year}`;
+        }
+
+        function formatTimeString(timeString) {
+            return timeString; 
+        }
+
+            const districtEmails = {
+            "PARVATHIPURAM MANYAM": "collector-pmanyam@ap.gov.in",
+            "SRIKAKULAM": "collector_sklm@ap.gov.in,collector.sklm@gmail.com,dsectionsklm@gmail.com",
+            "VISAKHAPATNAM": "collector_vspm@ap.gov.in,collectorpeshivizag@gmail.com,drovskds@gmail.com,dtc_visakhapatnam@aptransport.org,commissioner_gvmc@yahoo.co.in,sru.gvmc@gmail.com",
+            "VIZIANAGARAM": "collector_vznm@ap.gov.in",
+            "ALLURI SITHARAMA RAJU": "collectorasrdistrict@gmail.com,collector-alluri@ap.gov.in",
+            "ANAKAPALLI": "collector-ankp@ap.gov.in,collectorpeshianakapalli@gmail.com,collectoranakapalli@gmail.com",
+            "KAKINADA": "collector-kkd@ap.gov.in",
+            "Dr.B.R.AMBEDKAR KONASEEMA": "collector-ksm@ap.gov.in",
+            "EAST GODAVARI": "collector_egd@ap.gov.in,collectoregd@gmail.com",
+            "WEST GODAVARI": "collector_wgd@ap.gov.in,collectorwestgodavari@gmail.com",
+            "ELURU": "collector-eluru@ap.gov.in,collectoreluru@gmail.com",
+            "NTR": "collector-ntr@ap.gov.in,collector.ntr@gmail.com",
+            "KRISHNA": "collector-ksn@ap.gov.in,collector_krsn@ap.gov.in,kricoll123@gmail.com",
+            "GUNTUR": "dsectionguntur@gmail.com,collector_gntr@ap.gov.in",
+            "PALNADU": "collector-palnadu@ap.gov.in,",
+            "BAPATLA": "collector-bapatla@ap.gov.in,collectorbapatla@gmail.com",
+            "PRAKASAM": "collector_prk@ap.gov.in,collector_pkm@ap.gov.in,",
+            "SRI POTTI SRIRAMULU NELLORE": "collector_nlr@ap.gov.in",
+            "CHITTOOR": "collector_cttr@ap.gov.in,dro.cttr@gmail.com,collectorchittoor@gmail.com",
+            "TIRUPATI": "collector.tirupati@ap.gov.in",
+            "ANNAMAYYA": "collector_annamayya@ap.gov.in,collector.annamayya@gmail.com",
+            "YSR KADAPA": "collector_kdp@ap.gov.in",
+            "KURNOOL": "collector_krnl@ap.gov.in,kurnoolcollector@gmail.com",
+            "NANDYAL": "collector-nandyal@ap.gov.in,nandyalcollector@gmail.com",
+            "SRI SATHYA SAI": "collector.sssai@ap.gov.in",
+            "ANANTAPUR": "collector_antp@ap.gov.in",
+        };
+function validateForm() {
+            const alertDate = document.getElementById('alertDate').value;
+            const alertTime = document.getElementById('alertTime').value;
+            const selectedDistricts = document.querySelectorAll('input[name="district"]:checked');
+            const AlertType = document.getElementById('AlertType').value;
+            const thunderstormIntensity = document.getElementById('thunderstormIntensity').value;
+            const lightningLikelihood = document.getElementById('lightningLikelihood').value;
+            const locationCoverage = document.getElementById('locationCoverage').value;
+            const windDescription = document.getElementById('windDescription').value;
+            const windSpeed = document.getElementById('windSpeed').value;
+            const rainfallIntensity = document.getElementById('rainfallIntensity').value;
+
+            if (!alertDate || !alertTime || selectedDistricts.length === 0 || !thunderstormIntensity || !lightningLikelihood || !locationCoverage || !windDescription || !windSpeed || !rainfallIntensity) {
+                alert('Please fill all fields before generating.');
+                return false;
+            }
+            return true;
+        }
+
+
+ function generateFirstAlert() {
+    if (!validateForm()) return;
+
+    const alertDate = formatDateString(document.getElementById('alertDate').value);
+    const alertTime = formatTimeString(document.getElementById('alertTime').value);
+    const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
+    const AlertType = document.getElementById('AlertType').value;
+    const thunderstormIntensity = document.getElementById('thunderstormIntensity').value;
+    const lightningLikelihood = document.getElementById('lightningLikelihood').value;
+    const locationCoverage = document.getElementById('locationCoverage').value;
+    const windDescription = document.getElementById('windDescription').value;
+    const windSpeed = document.getElementById('windSpeed').value;
+    const rainfallIntensity = document.getElementById('rainfallIntensity').value;
+
+    let districtString = '';
+    const yanamIncluded = selectedDistricts.includes('YANAM');
+
+      if (yanamIncluded) {
+         const otherDistricts = selectedDistricts.filter(district => district !== 'YANAM');
+        districtString = otherDistricts.length > 0 ? otherDistricts.join(', ') + (otherDistricts.length > 1 ? ' districts and YANAM' : ' district and YANAM'): 'YANAM';
+
+
+    } else {
+        districtString = selectedDistricts.length > 1 
+            ? selectedDistricts.slice(0, -1).join(', ') + ' and ' + selectedDistricts.slice(-1)
+            : selectedDistricts[0] || 'N/A';
+    }
+
+    const alertMessage = `*CWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :*\n\n${thunderstormIntensity} Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and ${rainfallIntensity} ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
+
+    const alertWithoutEmails = document.getElementById('alertWithoutEmails');
+    alertWithoutEmails.textContent = alertMessage;
+    alertWithoutEmails.style.display = 'block';
+    document.getElementById('firstAlertButtons').style.display = 'flex';
+}
+
+function generateSecondAlert() {
+    if (!validateForm()) return;
+
+    const alertDate = formatDateString(document.getElementById('alertDate').value);
+    const alertTime = formatTimeString(document.getElementById('alertTime').value);
+    const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
+    const AlertType = document.getElementById('AlertType').value;
+    const thunderstormIntensity = document.getElementById('thunderstormIntensity').value;
+    const lightningLikelihood = document.getElementById('lightningLikelihood').value;
+    const locationCoverage = document.getElementById('locationCoverage').value;
+    const windDescription = document.getElementById('windDescription').value;
+    const windSpeed = document.getElementById('windSpeed').value;
+    const rainfallIntensity = document.getElementById('rainfallIntensity').value;
+
+    const fixedEmails = [
+        "APDATA 2021 <apdata2021@gmail.com>",
+        "apsdma@ap.gov.in",
+        "Amaravati Met Centre <mc.amaravati@gmail.com>",
+        "APSDMA SEOC <seoc-apsdma@ap.gov.in>",
+        "IMD Weather Channel <wxchannel@gmail.com>",
+        "Met Centre Amaravati IMD <mcamaravati.ws@imd.gov.in>",
+        "Nowcast Division <nowcastdivision@gmail.com>",
+        "nwfc weather <wxchannel1@gmail.com>"
+    ];
+
+    const districtEmailsList = selectedDistricts.map(district => districtEmails[district]);
+    let districtString = '';
+    const yanamIncluded = selectedDistricts.includes('YANAM');
+
+    if (yanamIncluded) {
+         const otherDistricts = selectedDistricts.filter(district => district !== 'YANAM');
+        districtString = otherDistricts.length > 0 ? otherDistricts.join(', ') + (otherDistricts.length > 1 ? ' districts and YANAM' : ' district and YANAM'): 'YANAM';
+
+    } else {
+        districtString = selectedDistricts.length > 1 
+            ? selectedDistricts.slice(0, -1).join(', ') + ' and ' + selectedDistricts.slice(-1)
+            : selectedDistricts[0] || 'N/A';
+    }
+
+    const alertMessage = `District Severe Weather Warning Dated ${alertDate} at ${alertTime} HRS IST.\n\n${districtEmailsList.join(', ')}${fixedEmails.length > 0 ? ', ' + fixedEmails.join(', ') : ''}\n\nCWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :\n\n${thunderstormIntensity} Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and ${rainfallIntensity} ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
+
+    const alertWithEmails = document.getElementById('alertWithEmails');
+    alertWithEmails.textContent = alertMessage;
+    alertWithEmails.style.display = 'block';
+    document.getElementById('secondAlertButtons').style.display = 'flex';
+}
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function shareOnWhatsApp(elementId) {
+            const text = encodeURIComponent(document.getElementById(elementId).textContent);
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${text}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+     function sendViaGmail(elementId) {
+    const alertDate = formatDateString(document.getElementById('alertDate').value);
+    const alertTime = formatTimeString(document.getElementById('alertTime').value);
+    const text = document.getElementById(elementId).textContent;
+
+
+    const alertStart = "CWC-Visakhapatnam/Date:";
+    const startIndex = text.indexOf(alertStart);
+
+
+    const alertMessage = text.substring(startIndex).trim();
+
+
+    const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
+    const districtEmailsList = selectedDistricts.map(district => districtEmails[district]);
+    const allEmails = districtEmailsList.flat().concat([
+        "apdata2021@gmail.com",
+        "apsdma@ap.gov.in",
+        "mc.amaravati@gmail.com",
+        "seoc-apsdma@ap.gov.in",
+        "wxchannel@gmail.com",
+        "mcamaravati.ws@imd.gov.in",
+        "nowcastdivision@gmail.com",
+        "wxchannel1@gmail.com"
+    ]).join(',');
+
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(allEmails)}&su=District%20severe%20weather%20warning%20dated%20${encodeURIComponent(alertDate)}%20at%20${encodeURIComponent(alertTime)}%20HRS%20IST&body=${encodeURIComponent(alertMessage)}`;
+    window.open(gmailUrl, '_blank');
+}
+        function generateBothAlerts() {
+            generateFirstAlert();
+            generateSecondAlert();
+        }
+    </script>
+</body>
+</html>

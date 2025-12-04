@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEAVY RAINFALL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 16px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: GREEN;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group button:hover {
+      background-color: BLACK;
+    }
+    .alert {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .button-group button {
+      width: 48%;
+      font-size: 14px;
+      padding: 10px;
+    }
+    .footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .footer img {
+      width: 200px;
+    }
+    .checkbox-group label {
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <form id="weatherAlertForm">
+    <div class="form-group checkbox-group">
+      <label>Districts</label><br>
+   <label><input type="checkbox" name="district" value="SRIKAKULAM">SRIKAKULAM</label>
+             <label><input type="checkbox" name="district" value="PARVATHIPURAM MANYAM">PARVATHIPURAM MANYAM</label>
+             <label><input type="checkbox" name="district" value="VIZIANAGARAM">VIZIANAGARAM</label>
+             <label><input type="checkbox" name="district" value="VISAKHAPATNAM">VISAKHAPATNAM</label> 
+             <label><input type="checkbox" name="district" value="ALLURI SITHARAMA RAJU">ALLURI SITHARAMA RAJU</label>
+             <label><input type="checkbox" name="district" value="ANAKAPALLI">ANAKAPALLI</label>
+             <label><input type="checkbox" name="district" value="KAKINADA">KAKINADA</label>
+             <label><input type="checkbox" name="district" value="YANAM">YANAM</label>
+             <label><input type="checkbox" name="district" value="Dr.B.R.AMBEDKAR KONASEEMA">Dr.B.R.AMBEDKAR KONASEEMA</label>
+             <label><input type="checkbox" name="district" value="EAST GODAVARI">EAST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="WEST GODAVARI">WEST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="ELURU">ELURU</label>
+             <label><input type="checkbox" name="district" value="NTR">NTR</label>
+             <label><input type="checkbox" name="district" value="KRISHNA">KRISHNA</label>
+             <label><input type="checkbox" name="district" value="GUNTUR">GUNTUR</label>
+             <label><input type="checkbox" name="district" value="PALNADU">PALNADU</label>
+             <label><input type="checkbox" name="district" value="BAPATLA">BAPATLA</label>
+             <label><input type="checkbox" name="district" value="PRAKASAM">PRAKASAM</label>
+             <label><input type="checkbox" name="district" value="SRI POTTI SRIRAMULU NELLORE">SRI POTTI SRIRAMULU NELLORE</label>
+             <label><input type="checkbox" name="district" value="CHITTOOR">CHITTOOR</label>
+             <label><input type="checkbox" name="district" value="TIRUPATI">TIRUPATI</label>
+             <label><input type="checkbox" name="district" value="ANNAMAYYA">ANNAMAYYA</label>
+             <label><input type="checkbox" name="district" value="YSR KADAPA">YSR KADAPA</label>
+             <label><input type="checkbox" name="district" value="KURNOOL">KURNOOL</label>
+             <label><input type="checkbox" name="district" value="NANDYAL">NANDYAL</label>
+             <label><input type="checkbox" name="district" value="SRI SATHYA SAI">SRI SATHYA SAI</label>
+             <label><input type="checkbox" name="district" value="ANANTAPUR">ANANTAPUR</label>
+      <br>
+      <button type="button" onclick="clearDistrictSelection()" style="background-color: grey; width: auto; padding: 5px 10px; margin-top: 10px;">Clear Selection</button>
+    </div>
+
+    <div class="form-group">
+      <label for="thunderstormIntensity">Thunderstorm Intensity</label>
+      <select id="thunderstormIntensity" required>
+        <option value="">Select...</option>
+        <option value="HEAVY">HEAVY</option>
+        <option value="HEAVY TO VERY HEAVY">HEAVY TO VERY HEAVY</option>
+        <option value="EXTREMELY HEAVY">EXTREMELY HEAVY</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="lightningLikelihood">Lightning Likelihood</label>
+      <select id="lightningLikelihood" required>
+        <option value="">Select...</option>
+        <option value="ONE OR TWO">one or two</option>
+        <option value="A FEW">a few</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="locationCoverage">Location Coverage</label>
+      <select id="locationCoverage" required>
+        <option value="">Select...</option>
+       <option value="COASTAL ANDHRA PRADESH & YANAM">COASTAL ANDHRA PRADESH & YANAM</option>
+       <option value="NORTH COASTAL ANDHRA PRADESH & YANAM">NORTH COASTAL ANDHRA PRADESH & YANAM</option>
+       <option value="SOUTH COASTAL ANDHRA PRADESH">SOUTH COASTAL ANDHRA PRADESH</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="button" onclick="generateFirstAlert()">Generate Message for WhatsApp</button>
+    </div>
+  </form>
+
+  <div id="alertWithoutEmails" class="alert" style="display: none;"></div>
+  <div id="alertWithEmails" class="alert" style="display: none; background:#eef;"></div>
+
+  <div class="button-group" id="firstAlertButtons" style="display: none;">
+  <button onclick="copyToClipboard('alertWithoutEmails')">Copy Message</button>
+  <button onclick="copyToClipboard('alertWithEmails')">Copy Emails</button>
+  <button onclick="shareOnWhatsApp('alertWithoutEmails')">WhatsApp</button>
+  </div>
+
+  <div class="footer" style="text-align: center; padding: 5px;">
+    <p style="margin: 0;">
+      <span style="float: right;"><b>꧁<i>SAI CHARAN</i>꧂</b></span>
+    </p>
+  </div>
+
+  <script>
+    const districtEmails = {
+        "PARVATHIPURAM MANYAM": "collector-pmanyam@ap.gov.in",
+           "SRIKAKULAM": "collector_sklm@ap.gov.in,collector.sklm@gmail.com,dsectionsklm@gmail.com",
+           "VISAKHAPATNAM": "collector_vspm@ap.gov.in,collectorpeshivizag@gmail.com,drovskds@gmail.com,dtc_visakhapatnam@aptransport.org,commissioner_gvmc@yahoo.co.in,sru.gvmc@gmail.com",
+           "VIZIANAGARAM": "collector_vznm@ap.gov.in",
+           "ALLURI SITHARAMA RAJU": "collectorasrdistrict@gmail.com,collector-alluri@ap.gov.in",
+           "ANAKAPALLI": "collector-ankp@ap.gov.in,collectorpeshianakapalli@gmail.com,collectoranakapalli@gmail.com",
+           "KAKINADA": "collector-kkd@ap.gov.in",
+           "Dr.B.R.AMBEDKAR KONASEEMA": "collector-ksm@ap.gov.in",
+           "EAST GODAVARI": "collector_egd@ap.gov.in,collectoregd@gmail.com",
+           "WEST GODAVARI": "collector_wgd@ap.gov.in,collectorwestgodavari@gmail.com",
+           "ELURU": "collector-eluru@ap.gov.in,collectoreluru@gmail.com",
+           "NTR": "collector-ntr@ap.gov.in,collector.ntr@gmail.com",
+           "KRISHNA": "collector-ksn@ap.gov.in,collector_krsn@ap.gov.in,kricoll123@gmail.com",
+           "GUNTUR": "dsectionguntur@gmail.com,collector_gntr@ap.gov.in",
+           "PALNADU": "collector-palnadu@ap.gov.in",
+           "BAPATLA": "collector-bapatla@ap.gov.in,collectorbapatla@gmail.com",
+           "PRAKASAM": "collector_prk@ap.gov.in,collector_pkm@ap.gov.in,",
+           "SRI POTTI SRIRAMULU NELLORE": "collector_nlr@ap.gov.in",
+           "CHITTOOR": "collector_cttr@ap.gov.in,dro.cttr@gmail.com,collectorchittoor@gmail.com",
+           "TIRUPATI": "collector.tirupati@ap.gov.in",
+           "ANNAMAYYA": "collector_annamayya@ap.gov.in,collector.annamayya@gmail.com",
+           "YSR KADAPA": "collector.kadapa@ap.gov.in",
+           "KURNOOL": "collector.kurnool@ap.gov.in",
+           "NANDYAL": "collector.nandyal@ap.gov.in",
+           "SRI SATHYA SAI": "collector.sssai@ap.gov.in",
+           "ANANTAPUR": "collector.anantapur@ap.gov.in"
+    };
+
+    function generateFirstAlert() {
+      const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
+      const thunderstormIntensity = document.getElementById('thunderstormIntensity').value;
+      const lightningLikelihood = document.getElementById('lightningLikelihood').value;
+      const locationCoverage = document.getElementById('locationCoverage').value;
+
+      let districtString = '';
+    const yanamIncluded = selectedDistricts.includes('YANAM');
+
+    if (yanamIncluded) {
+           const otherDistricts = selectedDistricts.filter(district => district !== 'YANAM');
+         districtString = otherDistricts.length > 0 ? otherDistricts.join(', ') + (otherDistricts.length > 1 ? ' DISTRICTS AND YANAM' : ' DISTRICT AND YANAM'): 'YANAM';
+
+
+    } else {
+        districtString = selectedDistricts.length > 1 
+            ? selectedDistricts.slice(0, -1).join(', ') + ' AND ' + selectedDistricts.slice(-1)
+            : selectedDistricts[0] || 'N/A';
+    }
+
+      const alertMessage = `${thunderstormIntensity} RAINFALL LIKELY TO OCCUR AT ${lightningLikelihood} PLACES OVER ${districtString} DISTRICTS OF ${locationCoverage} DURING NEXT 24 HOURS.`;
+
+      // Build email string
+      let emailList = selectedDistricts.map(d => districtEmails[d] || "").filter(e => e).join("; ");
+
+      document.getElementById('alertWithoutEmails').textContent = alertMessage;
+      document.getElementById('alertWithoutEmails').style.display = 'block';
+
+      document.getElementById('alertWithEmails').textContent = " " + (emailList || "N/A");
+      document.getElementById('alertWithEmails').style.display = 'block';
+
+      document.getElementById('firstAlertButtons').style.display = 'flex';
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard");
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+
+    function shareOnWhatsApp(elementId) {
+      const text = encodeURIComponent(document.getElementById(elementId).textContent);
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${text}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function clearDistrictSelection() {
+      document.querySelectorAll('input[name="district"]:checked').forEach(cb => cb.checked = false);
+    }
+  </script>
+</body>
+</html>

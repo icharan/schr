@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Case</title>
+    <h3>If any words are not properly arranged, please message.</h3>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .result-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background-color: #f9f9f9;
+            contenteditable: true; /* Makes the result box editable */
+        }
+        .options {
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convert Text for Fisherman Warning</h1>
+    <textarea id="inputText" rows="10" placeholder="Enter your text here..."></textarea>
+    <br>
+    <button onclick="convertToSentenceCase()">Convert to Sentence Case</button>
+    <button onclick="convertToUpperCase()">Convert to Upper Case</button>
+
+    <div id="sentenceCaseResult" class="result-box"></div>
+    <div class="options">
+        <button onclick="copySentenceCase()">Copy Sentence Case</button>
+    </div>
+    <div id="uppercaseResult" class="result-box"></div>
+    <div class="options">
+        <button onclick="copyUpperCase()">Copy Upper Case</button>
+    </div>
+
+    <div class="footer" style="text-align: center; padding: 5px;">
+        <p style="margin: 0;">
+            <span style="float: right;"><b><i>SAI CHARAN</i></b></span>
+        </p>
+    </div>
+
+    <script>
+        function convertToSentenceCase() {
+            const inputText = document.getElementById("inputText").innerHTML.toLowerCase();
+            let result = '';
+            let capitalizeNext = true;
+            const specialNames = [
+                "Andhra Pradesh", "Fishermen", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", 
+                "Haryana", "Himachal Pradesh", "Jharkhand", "South-Westerly", "South-Easterly", "Central", "Malabar Coast", 
+                "Nil", "IST", "Day", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Ocean", "m/sec",
+                "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", 
+                "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", 
+                "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Andhra Coast", "Andhra", 
+                "Delhi", "Puducherry", "Konkan", "North", "South", "East", "West", "Bay of Bengal", "INCOIS", 
+                "Westcentral", "Coromandel Coast", "Northern", "Southern", "Eastern", "Western", "Southeast", 
+                "Northwest", "Northeast", "Gangetic", "Southwest", "Northwest", " m/sec"
+            ];
+
+            for (let i = 0; i < inputText.length; i++) {
+                let char = inputText[i];
+
+                if (capitalizeNext && char >= 'a' && char <= 'z') {
+                    char = char.toUpperCase();
+                    capitalizeNext = false;
+                }
+
+                if (char === '.' || char === '!' || char === '?') {
+                    capitalizeNext = true;
+                }
+
+                result += char;
+            }
+
+            // Capitalize state names of India and coastal regions
+            specialNames.forEach(name => {
+                const regex = new RegExp(`\\b${name.toLowerCase()}\\b`, 'g');
+                result = result.replace(regex, name);
+            });
+
+            document.getElementById("sentenceCaseResult").innerHTML = result;
+        }
+
+        function convertToUpperCase() {
+            const inputText = document.getElementById("inputText").innerHTML;
+            const result = inputText.toUpperCase();
+            document.getElementById("uppercaseResult").innerHTML = result;
+        }
+
+        function copySentenceCase() {
+            const result = document.getElementById("sentenceCaseResult").innerHTML;
+            copyToClipboard(result);
+        }
+
+        function copyUpperCase() {
+            const result = document.getElementById("uppercaseResult").innerHTML;
+            copyToClipboard(result);
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Text copied to clipboard!");
+        }
+    </script>
+</body>
+</html>

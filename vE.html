@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI CHARAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>VERIFICATION OF F/W AND CB</h1>
+    <button onclick="openAllImages()">View SITES(CWCVSK,MAUSAM,RSMC) </button>
+
+    <script>
+
+        function openAllImages() {
+            const urls = [
+                'https://nwp.imd.gov.in/models_tmax.php',
+                'https://nwp.imd.gov.in/models_tmin.php',
+                'https://nwp.imd.gov.in/models_intensity_mme_07days.php',
+                'https://nwp.imd.gov.in/models_distribution_mme_07days.php',
+                'https://nwp.imd.gov.in/models/input_test/VISAKHAPATNAM.php',
+                          ];
+            
+            urls.forEach(url => window.open(url, '_blank'));
+        }
+    </script>
+</body>
+</html>

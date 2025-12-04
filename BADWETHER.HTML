@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin Email Generator</title>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f0f4f8;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-100">
+        <h1 class="text-xs text-center text-gray-10 mb-5">CHECK (TO ADDRESSES) BEFORE SENDING</h1>
+
+     
+<div class="mb-7 mt-5">
+
+            <label for="bulletinType" class="block text-gray-700 text-sm font-small mb-100">Select Bulletin Type:</label>
+            <select id="bulletinType" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-200 ease-in-out hover:border-blue-400">
+                <option value="select">select</option>
+                <option value="special-weather">SPECIAL WEATHER BULLETIN</option>
+                <option value="cyclone-warning">CYCLONE WARNING BULLETIN</option>
+                <option value="press">PRESS BULLETIN</option>
+                <option value="air">AIR BULLETIN</option>
+            </select>
+        </div>
+
+      <div class="mb-10 mt-100">
+            <label for="bulletinTime" class="block text-gray-700 text-sm font-medium mb-2">Select Time:</label>
+            <input type="time" id="bulletinTime" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-200 ease-in-out hover:border-blue-400">
+        </div>
+
+        <!-- Bulletin Number (Hidden by default) -->
+        <div id="bulletinNumberContainer" class="mb-10 mt-5 hidden">
+            <label for="bulletinNumber" class="block text-gray-700 text-sm font-medium mb-2">Enter Bulletin Number:</label>
+            <input type="text" id="bulletinNumber" placeholder="" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-200 ease-in-out hover:border-blue-400">
+        </div>
+
+        <!-- Generate Email Button -->
+        <button id="generateEmailBtn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 rounded-lg shadow-md hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-300 ease-in-out transform hover:scale-105">
+            REDIRECT GMAIL
+        </button>
+    </div>
+
+    <script>
+        const bulletinTypeSelect = document.getElementById('bulletinType');
+        const bulletinTimeInput = document.getElementById('bulletinTime');
+        const generateEmailButton = document.getElementById('generateEmailBtn');
+        const bulletinNumberContainer = document.getElementById('bulletinNumberContainer');
+        const bulletinNumberInput = document.getElementById('bulletinNumber');
+
+        // Show/hide bulletin number input based on type
+        bulletinTypeSelect.addEventListener('change', () => {
+            const selected = bulletinTypeSelect.value;
+            if (selected === 'cyclone-warning' || selected === 'special-weather') {
+                bulletinNumberContainer.classList.remove('hidden');
+            } else {
+                bulletinNumberContainer.classList.add('hidden');
+            }
+        });
+
+        generateEmailButton.addEventListener('click', () => {
+            const selectedType = bulletinTypeSelect.value;
+            let timeValue = bulletinTimeInput.value.trim();
+
+            if (!timeValue) {
+                alert('Please select a time.');
+                return;
+            }
+
+            const [hour, minute] = timeValue.split(':');
+            const formattedTime = `${hour}${minute} HRS IST`;
+
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const formattedDate = `${day}-${month}-${year}`;
+
+            let subject = '';
+            let toAddress = '';
+
+            switch (selectedType) {
+                case 'select':
+                     alert('Please select type.');
+                      return;
+                case 'special-weather':
+                    if (!bulletinNumberInput.value.trim()) {
+                        alert('Please enter the Bulletin Number.');
+                        return;
+                    }
+                    subject = `SPECIAL WEATHER BULLETIN - ${bulletinNumberInput.value.trim()} DATED: ${formattedDate}/${formattedTime}`;
+                    toAddress = 'apsdma@ap.gov.in, btcontrolwaltair@gmail.com, cbeecor123@gmail.com, drovskds@gmail.com, dtc_visakhapatnam@aptransport.org, sru.gvmc@gmail.com, dsectionguntur@gmail.com, cs@ap.gov.in, commandant10thndrf@gmail.com, commr_relief_rev@ap.gov.in, dspnorthcsp@gmail.com, is@ap.gov.in, knagesh@hpcl.in, narayanapv@hpcl.in, Rajamani4env@gmail.com, ratan@hpcl.in, rramakrishnan@hpcl.in, rso.vspurban@gmail.com, secywel@nic.in, srdenbridgeswat@gmail.com, srdenbrsbp@gmail.com, srdencowaltair@yahoo.com, teamacoy@gmail.com, uditnandi@hpcl.in, collector-palnadu@ap.gov.in, collector-bapatla@ap.gov.in, collector_pkm@ap.gov.in, collector_nlr@ap.gov.in, collector_cttr@ap.gov.in, collectorchittoor@gmail.com, dro.cttr@gmail.com, collector.tirupati@ap.gov.in, collector_kdp@ap.gov.in, collector_annamayya@ap.gov.in, collector.annamayya@gmail.com, collector_krnl@ap.gov.in, kurnoolcollector@gmail.com, collector-nandyal@ap.gov.in, nandyalcollector@gmail.com, collector_antp@ap.gov.in, collector.sssai@ap.gov.in, acwctp@gmail.com, mc.amaravati@gmail.com, weatherccscr@gmail.com, seoc-apsdma@ap.gov.in, cwdhq2008@gmail.com, cpro.ecor@gmail.com, hyddwr@gmail.com, mcamaravati.ws@imd.gov.in, mohapatraimd@gmail.com, srdsovskp@gmail.com, sunnu1887@gmail.com, sunithas.devi@gmail.com, dspintvspu@gmail.com, collector_sklm@ap.gov.in, collector.sklm@gmail.com, collector-pmanyam@ap.gov.in, collector_vznm@ap.gov.in, collector-alluri@ap.gov.in, collectorasrdistrict@gmail.com, collector_vspm@ap.gov.in, collectorpeshivizag@gmail.com, collectorpeshianakapalli@gmail.com, collectoranakapalli@gmail.com, collector-kkd@ap.gov.in, collector_egd@ap.gov.in, collectoregd@gmail.com, collector-ksm@ap.gov.in, collectoreluru@gmail.com, collector_wgd@ap.gov.in, collectorwestgodavari@gmail.com, collector_krsn@ap.gov.in, kricoll123@gmail.com, collector-ntr@ap.gov.in, collector.ntr@gmail.com, collector_gntr@ap.gov.in';
+
+                    break;
+                case 'cyclone-warning':
+                    if (!bulletinNumberInput.value.trim()) {
+                        alert('Please enter the Bulletin Number.');
+                        return;
+                    }
+                    subject = `CYCLONE WARNING BULLETIN - ${bulletinNumberInput.value.trim()} DATED: ${formattedDate}/${formattedTime}`;
+                   toAddress = 'apsdma@ap.gov.in, btcontrolwaltair@gmail.com, cbeecor123@gmail.com, drovskds@gmail.com, dtc_visakhapatnam@aptransport.org, sru.gvmc@gmail.com, dsectionguntur@gmail.com, cs@ap.gov.in, commandant10thndrf@gmail.com, commr_relief_rev@ap.gov.in, dspnorthcsp@gmail.com, is@ap.gov.in, knagesh@hpcl.in, narayanapv@hpcl.in, Rajamani4env@gmail.com, ratan@hpcl.in, rramakrishnan@hpcl.in, rso.vspurban@gmail.com, secywel@nic.in, srdenbridgeswat@gmail.com, srdenbrsbp@gmail.com, srdencowaltair@yahoo.com, teamacoy@gmail.com, uditnandi@hpcl.in, collector-palnadu@ap.gov.in, collector-bapatla@ap.gov.in, collector_pkm@ap.gov.in, collector_nlr@ap.gov.in, collector_cttr@ap.gov.in, collectorchittoor@gmail.com, dro.cttr@gmail.com, collector.tirupati@ap.gov.in, collector_kdp@ap.gov.in, collector_annamayya@ap.gov.in, collector.annamayya@gmail.com, collector_krnl@ap.gov.in, kurnoolcollector@gmail.com, collector-nandyal@ap.gov.in, nandyalcollector@gmail.com, collector_antp@ap.gov.in, collector.sssai@ap.gov.in, acwctp@gmail.com, mc.amaravati@gmail.com, weatherccscr@gmail.com, seoc-apsdma@ap.gov.in, cwdhq2008@gmail.com, cpro.ecor@gmail.com, hyddwr@gmail.com, mcamaravati.ws@imd.gov.in, mohapatraimd@gmail.com, srdsovskp@gmail.com, sunnu1887@gmail.com, sunithas.devi@gmail.com, dspintvspu@gmail.com, collector_sklm@ap.gov.in, collector.sklm@gmail.com, collector-pmanyam@ap.gov.in, collector_vznm@ap.gov.in, collector-alluri@ap.gov.in, collectorasrdistrict@gmail.com, collector_vspm@ap.gov.in, collectorpeshivizag@gmail.com, collectorpeshianakapalli@gmail.com, collectoranakapalli@gmail.com, collector-kkd@ap.gov.in, collector_egd@ap.gov.in, collectoregd@gmail.com, collector-ksm@ap.gov.in, collectoreluru@gmail.com, collector_wgd@ap.gov.in, collectorwestgodavari@gmail.com, collector_krsn@ap.gov.in, kricoll123@gmail.com, collector-ntr@ap.gov.in, collector.ntr@gmail.com, collector_gntr@ap.gov.in';
+
+
+                    break;
+                case 'press':
+                    subject = `PRESS BULLETIN DATED: ${formattedDate}/${formattedTime}`;
+                 toAddress = 'raogeej@gamil.com, adi.nalla@gmail.com, hidayforu@gmail.com, krbollam@gmail.com, geminivsp@gmail.com, harishgilai@newindianexpress.com, kamal99@gmail.com, madhu.narava76@gmail.com, subrahmanyam.gs@thehindu.co.in, bhaskarcrime@yahoo.com, vizagsakshi@gmail.com, airvijayawadanews@gmail.com, airhyd@hotmail.com, airpcvsp@gmail.com, dutyroomvsp@gmail.com, AIRVIJAWADA@air.org.in, kadaparadio@gmail.com, fmradionellore4@gmail.com';
+
+                    break;
+                case 'air':
+                    subject = `AIR BULLETIN DATED: ${formattedDate}/${formattedTime}`;
+                    toAddress = 'raogeej@gamil.com, adi.nalla@gmail.com, hidayforu@gmail.com, krbollam@gmail.com, geminivsp@gmail.com, harishgilai@newindianexpress.com, kamal99@gmail.com, madhu.narava76@gmail.com, subrahmanyam.gs@thehindu.co.in, bhaskarcrime@yahoo.com, vizagsakshi@gmail.com, airvijayawadanews@gmail.com, airhyd@hotmail.com, airpcvsp@gmail.com, dutyroomvsp@gmail.com, AIRVIJAWADA@air.org.in, kadaparadio@gmail.com, fmradionellore4@gmail.com';
+
+                    break;
+                default:
+                    subject = `BULLETIN DT: ${formattedDate}/${formattedTime}`;
+                    toAddress = 'default@example.com';
+            }
+
+            // Open Gmail compose window in new tab
+            const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(toAddress)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent("SIR/MADAM,\n\nPLEASE FIND THE ATTACHMENT.\n\n===")}`;
+            window.open(gmailLink, '_blank');
+        });
+    </script>
+</body>
+</html>

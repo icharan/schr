@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI CHARAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>VERIFICATION OF F/W AND CB</h1>
+    <button onclick="openAllImages()">View SITES(CWCVSK,MAUSAM,RSMC) </button>
+
+    <script>
+
+        function openAllImages() {
+            const urls = [
+                'https://mausam.imd.gov.in/visakhapatnam/mcdata/Fisherman_warning.pdf',
+                'https://mausam.imd.gov.in/visakhapatnam/mcdata/coastal_bulletin.pdf',
+                'https://mausam.imd.gov.in/responsive/marine_forecast.php',
+                'https://mausam.imd.gov.in/Forecast/coastal_bulletin_new.php?id=7',
+                'https://rsmcnewdelhi.imd.gov.in/coastal-weather-bulletin.php',
+                'https://rsmcnewdelhi.imd.gov.in/fishermen-warning.php',
+'https://mausam.imd.gov.in/visakhapatnam/mcdata/heavyrain_warning.pdf',
+'https://mausam.imd.gov.in/visakhapatnam/mcdata/strongwind_warning.pdf',
+'https://mausam.imd.gov.in/visakhapatnam/mcdata/special_bulletin.pdf',
+'https://mausam.imd.gov.in/visakhapatnam/mcdata/press_bulletin.pdf',    
+'https://mausam.imd.gov.in/visakhapatnam/mcdata/press.pdf',      
+            ];
+            
+            urls.forEach(url => window.open(url, '_blank'));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>charan</title>
+  <style>
+    :root{ --bg:#f7fafc; --card:#ffffff; --muted:#6b7280; --accent:#0ea5a4 }
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:var(--bg); color:#111; margin:0; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh}
+    h1{font-size:20px;margin:0 0 24px;text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
+    .tile{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;text-align:center}
+    .tile:focus{outline:3px solid rgba(14,165,164,0.12)}
+    .tile:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(15,23,42,0.09)}
+    .thumb{width:100%;height:120px;border-radius:8px;object-fit:cover;margin-bottom:12px;background:linear-gradient(135deg,#eef2ff,#fff)}
+    .label{font-weight:600;margin-bottom:6px}
+    .sub{font-size:13px;color:var(--muted)}
+    @media (max-width:700px){.grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:420px){.grid{grid-template-columns:repeat(1,1fr)} }
+  </style>
+</head>
+<body>
+  <h1>Click on an icon to open its webpage</h1>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // --- Customize these 9 entries ---
+    const links = [
+      {title: 'IMD Radar - CAZ MPT', subtitle: 'caz_mpt.gif', url: 'https://mausam.imd.gov.in/Radar/caz_mpt.gif', thumb: 'https://mausam.imd.gov.in/Radar/caz_mpt.gif'},
+      {title: 'IMD VSK', subtitle: 'caz_vsk.gif', url: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_vsk.gif', thumb: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_vsk.gif'},
+      {title: 'IMD HYD', subtitle: 'caz_hyd.gif', url: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_hyd.gif', thumb: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_hyd.gif'},
+      {title: 'IMD CNI', subtitle: 'caz_cni.gif', url: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_cni.gif', thumb: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/caz_cni.gif'},
+      {title: 'PPZ CNI', subtitle: 'ppz_cni.gif', url: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/ppz_cni.gif', thumb: 'https://internal.imd.gov.in/section/dwrIndiaMet/img/ppz_cni.gif'},
+      {title: 'ILDN', subtitle: 'ildn.in', url: 'https://ildn.in/', thumb: 'E:/charan/BSC/9.png'},
+      {title: 'Maps IITM ', subtitle: 'Maps IITM', url: 'http://103.251.186.48/map/?view=55f5bbb4-5d2c-4602-a334-1572015d861e', thumb: 'E:/charan/BSC/10.png'},
+      {title: 'ALL RADARS', subtitle: 'ALL RADARS', url: 'file:///E:/charan/BSC/Radar1.html', thumb: 'E:/charan/BSC/12.png'}
+          ];
+
+    const grid = document.getElementById('grid');
+
+    links.forEach((item, idx) => {
+      const d = document.createElement('div');
+      d.className = 'tile';
+      d.tabIndex = 0;
+      d.setAttribute('role','link');
+      d.setAttribute('aria-label', item.title + ' — ' + item.subtitle);
+
+      d.innerHTML = `
+        <img class="thumb" src="${item.thumb}" alt="${item.title}" onerror="this.style.opacity=0.85;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'240\'><rect width=\'100%\' height=\'100%\' fill=\'%23eef2ff\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'Arial\' font-size=20 fill=\'%23686f7a\'>No preview</text></svg>'"/>
+        <div class="label">${item.title}</div>
+        <div class="sub">${item.subtitle}</div>
+      `;
+
+      // click and keyboard support
+      d.addEventListener('click', () => window.open(item.url, '_blank', 'noopener'));
+      d.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open(item.url, '_blank', 'noopener'); } });
+
+      grid.appendChild(d);
+    });
+  </script>
+</body>
+</html>

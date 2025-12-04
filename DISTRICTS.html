@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District Selector</title>
+    <style>
+    body {
+        font-size: 16px; /* Base font size */
+    }
+        .container {
+            display: flex;
+            flex-direction: column; 
+            margin: 20px;
+        }
+        .box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px; 
+        }
+        .box h3 {
+            margin-top: 0;
+        }
+        .box textarea {
+            width: 100%;
+            height: 100px;
+            border: none;
+            background: #f9f9f9;
+            padding: 10px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            white-space: nowrap;
+            overflow-x: auto;
+            word-wrap: normal;
+        }
+        .box button{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+            .clear-button {
+            display: block;
+            width: 10%;
+            padding: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .box button {
+            background: #007bff;
+        }
+        .box button:hover {
+            background: #0056b3;
+        }
+        .clear-button {
+            background: #dc3545;
+        }
+        .clear-button:hover {
+            background: #c82333;
+        }
+        .districts-container {
+            margin: 20px;
+        }
+        footer {
+            background-color: white;
+            text-align: right;
+            padding: 10px;
+            margin-top: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        footer p {
+            margin: 0;
+            font-size: 18px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="districts-container">
+           <div class="form-group checkbox-group">
+             <label>Districts</label><br>
+             <label><input type="checkbox" name="district" value="SRIKAKULAM">SRIKAKULAM</label>
+             <label><input type="checkbox" name="district" value="PARVATHIPURAM MANYAM">PARVATHIPURAM MANYAM</label>
+             <label><input type="checkbox" name="district" value="VIZIANAGARAM">VIZIANAGARAM</label>
+             <label><input type="checkbox" name="district" value="VISAKHAPATNAM">VISAKHAPATNAM</label> 
+             <label><input type="checkbox" name="district" value="ALLURI SITHARAMA RAJU">ALLURI SITHARAMA RAJU</label>
+             <label><input type="checkbox" name="district" value="ANAKAPALLI">ANAKAPALLI</label>
+             <label><input type="checkbox" name="district" value="KAKINADA">KAKINADA</label>
+             <label><input type="checkbox" name="district" value="YANAM">YANAM</label>
+             <label><input type="checkbox" name="district" value="Dr.BR.AMBEDKAR KONASEEMA">Dr.BR.AMBEDKAR KONASEEMA</label>
+             <label><input type="checkbox" name="district" value="EAST GODAVARI">EAST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="WEST GODAVARI">WEST GODAVARI</label>
+             <label><input type="checkbox" name="district" value="ELURU">ELURU</label>
+             <label><input type="checkbox" name="district" value="NTR">NTR</label>
+             <label><input type="checkbox" name="district" value="KRISHNA">KRISHNA</label>
+             <label><input type="checkbox" name="district" value="GUNTUR">GUNTUR</label>
+             <label><input type="checkbox" name="district" value="PALNADU">PALNADU</label>
+             <label><input type="checkbox" name="district" value="BAPATLA">BAPATLA</label>
+             <label><input type="checkbox" name="district" value="PRAKASAM">PRAKASAM</label>
+             <label><input type="checkbox" name="district" value="SRI POTTI SRIRAMULU NELLORE">SRI POTTI SRIRAMULU NELLORE</label>
+             <label><input type="checkbox" name="district" value="CHITTOOR">CHITTOOR</label>
+             <label><input type="checkbox" name="district" value="TIRUPATI">TIRUPATI</label>
+             <label><input type="checkbox" name="district" value="ANNAMAYYA">ANNAMAYYA</label>
+             <label><input type="checkbox" name="district" value="YSR KADAPA">YSR KADAPA</label>
+             <label><input type="checkbox" name="district" value="KURNOOL">KURNOOL</label>
+             <label><input type="checkbox" name="district" value="NANDYAL">NANDYAL</label>
+             <label><input type="checkbox" name="district" value="SRI SATHYA SAI">SRI SATHYA SAI</label>
+             <label><input type="checkbox" name="district" value="ANANTAPUR">ANANTAPUR</label>
+             <br><strong>Ports</strong><br>
+             <label><input type="checkbox" name="district" value="KALINGAPATNAM">KALINGAPATNAM</label>
+             <label><input type="checkbox" name="district" value="BHEEMUNIPATNAM">BHEEMUNIPATNAM</label>
+             <label><input type="checkbox" name="district" value="VISAKHAPATNAM">VISAKHAPATNAM</label>
+             <label><input type="checkbox" name="district" value="GANGAVARAM">GANGAVARAM</label>
+             <label><input type="checkbox" name="district" value="KAKINADA">KAKINADA</label>
+             <label><input type="checkbox" name="district" value="MACHILIPATNAM">MACHILIPATNAM</label>
+             <label><input type="checkbox" name="district" value="NIZAMPATNAM">NIZAMPATNAM</label>
+             <label><input type="checkbox" name="district" value="KRISHNAPATNAM">KRISHNAPATNAM</label>
+             <label><input type="checkbox" name="district" value="VADAREVU">VADAREVU</label>
+             <label><input type="checkbox" name="district" value=" Scattered Heavy to very Heavy with extremely heavy rain"> Scattered Heavy to very Heavy with extremely heavy rain</label>
+             <label><input type="checkbox" name="district" value="Local Cautionary Signal Number Three (LC – III) ">Local Cautionary Signal Number Three (LC – III) </label>
+             <label><input type="checkbox" name="district" value="Local Warning Signal Number Four (LW - IV) ">Local Warning Signal Number Four (LW-IV)</label>
+             <label><input type="checkbox" name="district" value="Distant Warning Signal Number – II (DW- II) with Section Signal Number-IV">Distant Warning Signal Number – II (DW- II) with Section Signal Number-IV</label>
+             <label><input type="checkbox" name="district" value="Great Danger Signal Number – TEN (GDS- X)">Great Danger Signal Number – TEN (GDS- X)</label>
+             <label><input type="checkbox" name="district" value="with Section Signal Number-IV">with Section Signal Number-IV</label>
+             <label><input type="checkbox" name="district" value="JANGAMAHESWARAPURAM">JANGAMAHESWARAPURAM</label>
+             <button class="clear-button" onclick="clearSelection()">Clear Selection</button>
+         </div>
+
+    <div class="container">
+        <div class="box">
+            <h3>Selected Districts</h3>
+            <textarea id="districtsBox" readonly></textarea>
+            <button onclick="copyToClipboard('districtsBox')">Copy Districts</button>
+
+
+        </div>
+    
+         <div class="box">
+            <h3>Selected Districts (Title Case)</h3>
+            <textarea id="districtsTitleCaseBox" readonly></textarea>
+            <button onclick="copyToClipboard('districtsTitleCaseBox')">Copy Districts (Title Case)</button>
+        </div>
+        <div class="box">
+            <h3>Selected Districts (Telugu)</h3>
+            <textarea id="districtsTeluguBox" readonly></textarea>
+            <button onclick="copyToClipboard('districtsTeluguBox')">Copy Districts (Telugu)</button>
+        </div>
+           <div class="box">
+            <h3>District Emails</h3>
+            <textarea id="emailsBox" readonly></textarea>
+            <button onclick="copyToClipboard('emailsBox')">Copy Emails</button>
+        </div>
+    </div>
+
+  <footer>
+    <p><strong>꧁CHARAN꧂</strong></p>
+</footer>
+
+    <script>
+           const emails = {
+           "PARVATHIPURAM MANYAM": "collector-pmanyam@ap.gov.in",
+           "SRIKAKULAM": "collector_sklm@ap.gov.in,collector.sklm@gmail.com,dsectionsklm@gmail.com",
+           "VISAKHAPATNAM": "collector_vspm@ap.gov.in,collectorpeshivizag@gmail.com,drovskds@gmail.com,dtc_visakhapatnam@aptransport.org,commissioner_gvmc@yahoo.co.in,sru.gvmc@gmail.com",
+           "VIZIANAGARAM": "collector_vznm@ap.gov.in",
+           "ALLURI SITHARAMA RAJU": "collectorasrdistrict@gmail.com,collector-alluri@ap.gov.in",
+           "ANAKAPALLI": "collector-ankp@ap.gov.in,collectorpeshianakapalli@gmail.com,collectoranakapalli@gmail.com",
+           "KAKINADA": "collector-kkd@ap.gov.in",
+           "Dr.BR.AMBEDKAR KONASEEMA": "collector-ksm@ap.gov.in",
+           "EAST GODAVARI": "collector_egd@ap.gov.in,collectoregd@gmail.com",
+           "WEST GODAVARI": "collector_wgd@ap.gov.in,collectorwestgodavari@gmail.com",
+           "ELURU": "collector-eluru@ap.gov.in,collectoreluru@gmail.com",
+           "NTR": "collector-ntr@ap.gov.in,collector.ntr@gmail.com",
+           "KRISHNA": "collector-ksn@ap.gov.in,collector_krsn@ap.gov.in,kricoll123@gmail.com",
+           "GUNTUR": "dsectionguntur@gmail.com,collector_gntr@ap.gov.in",
+           "PALNADU": "collector-palnadu@ap.gov.in,",
+           "BAPATLA": "collector-bapatla@ap.gov.in,collectorbapatla@gmail.com",
+           "PRAKASAM": "collector_prk@ap.gov.in,collector_pkm@ap.gov.in,",
+           "SRI POTTI SRIRAMULU NELLORE": "collector_nlr@ap.gov.in",
+           "CHITTOOR": "collector_cttr@ap.gov.in,dro.cttr@gmail.com,collectorchittoor@gmail.com",
+           "TIRUPATI": "collector.tirupati@ap.gov.in",
+           "ANNAMAYYA": "collector_annamayya@ap.gov.in,collector.annamayya@gmail.com",
+           "YSR KADAPA": "collector.kadapa@ap.gov.in",
+           "KURNOOL": "collector.kurnool@ap.gov.in",
+           "NANDYAL": "collector.nandyal@ap.gov.in",
+           "SRI SATHYA SAI": "collector.sssai@ap.gov.in",
+           "ANANTAPUR": "collector.anantapur@ap.gov.in"
+        };
+
+        const districtTeluguNames = {
+            "SRIKAKULAM": "శ్రీకాకుళం",
+            "PARVATHIPURAM MANYAM": "పార్వతీపురం మన్యం",
+            "VIZIANAGARAM": "విజయనగరం",
+            "VISAKHAPATNAM": "విశాఖపట్నం",
+            "ALLURI SITHARAMA RAJU": "అల్లూరి సీతారామ రాజు",
+            "ANAKAPALLI": "అనకాపల్లి",
+            "KAKINADA": "కాకినాడ",
+            "YANAM": "యానాం",
+            "Dr.BR.AMBEDKAR KONASEEMA": "డా.బి.ఆర్.అంబేద్కర్ కోనసీమ",
+            "EAST GODAVARI": "తూర్పు గోదావరి",
+            "WEST GODAVARI": "పశ్చిమ గోదావరి",
+            "ELURU": "ఏలూరు",
+            "NTR": "ఎన్టీఆర్",
+            "KRISHNA": "కృష్ణా",
+            "GUNTUR": "గుంటూరు",
+            "PALNADU": "పల్నాడు",
+            "BAPATLA": "బాపట్ల",
+            "PRAKASAM": "ప్రకాశం",
+            "SRI POTTI SRIRAMULU NELLORE": "శ్రీ పొట్టి శ్రీరాములు నెల్లూరు",
+            "CHITTOOR": "చిత్తూరు",
+            "TIRUPATI": "తిరుపతి",
+            "ANNAMAYYA": "అన్నమయ్య",
+            "YSR KADAPA": "వైఎస్ఆర్ కడప",
+            "KURNOOL": "కర్నూలు",
+            "NANDYAL": "నంద్యాల",
+            "SRI SATHYA SAI": "శ్రీ సత్య సాయి",
+            "ANANTAPUR": "అనంతపురం"
+        };
+
+        // Function to convert a string to Title Case
+        function toTitleCase(str) {
+    const exceptions = {
+        "Dr.BR.AMBEDKAR KONASEEMA": "Dr. B.R. Ambedkar Konaseema",
+        "NTR": "NTR", "YSR KADAPA": "YSR Kadapa"
+    };
+
+    if (exceptions[str]) {
+        return exceptions[str];
+    }
+
+    return str.toLowerCase().replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1);
+    });
+}
+        function updateDistricts() {
+            const checkboxes = document.querySelectorAll('input[name="district"]:checked');
+            const selectedDistricts = [];
+            const selectedEmails = [];
+            const selectedDistrictsTelugu = [];
+            const selectedDistrictsTitleCase = []; // Changed from lowercase to title case
+
+            checkboxes.forEach((checkbox) => {
+                selectedDistricts.push(checkbox.value);
+                selectedEmails.push(emails[checkbox.value]);
+                selectedDistrictsTelugu.push(districtTeluguNames[checkbox.value]);
+                selectedDistrictsTitleCase.push(toTitleCase(checkbox.value)); // Apply title case function
+            });
+
+            document.getElementById('districtsBox').value = selectedDistricts.join(', ');
+            document.getElementById('emailsBox').value = selectedEmails.join(', ');
+            document.getElementById('districtsTeluguBox').value = selectedDistrictsTelugu.join(', ');
+            document.getElementById('districtsTitleCaseBox').value = selectedDistrictsTitleCase.join(', '); // Update ID
+        }
+
+        document.querySelectorAll('input[name="district"]').forEach((checkbox) => {
+            checkbox.addEventListener('change', updateDistricts);
+        });
+
+        function clearSelection() {
+            document.querySelectorAll('input[name="district"]:checked').forEach((checkbox) => {
+                checkbox.checked = false;
+            });
+            updateDistricts();
+        }
+
+        function copyToClipboard(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            textarea.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard: ' + textarea.value);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Image Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Radar Image Viewer</h1>
+    <button onclick="openAllImages()">View All Images</button>
+
+    <script>
+
+        function openAllImages() {
+            const urls = [
+                'https://internal.imd.gov.in/section/dwr/img/vp2_agt.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_bhp.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_cni.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_delhi.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_dlh.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_goa.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_gop.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_hyd.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_jpr.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_kol.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_koc.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_kkl.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_lkn.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_mbr.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_mum.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_ngp.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_pdp.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_ptn.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_shr.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_tvm.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_vsk.gif',
+                'https://internal.imd.gov.in/section/dwr/img/vp2_mpt.gif'
+            ];
+            
+            urls.forEach(url => window.open(url, '_blank'));
+        }
+    </script>
+</body>
+</html>

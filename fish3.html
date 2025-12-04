@@ -1,0 +1,152 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Case</title>
+    <h3>if any words are not properly arranged please message</h3>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .result-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background-color: #f9f9f9;
+            min-height: 100px;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convert Text for fisherman warning</h1>
+    <textarea id="inputText" rows="10" placeholder="Enter your text here..."></textarea>
+    <br>
+    <button onclick="convertToSentenceCase()">Convert to Sentence Case</button>
+    <button onclick="convertToUpperCase()">Convert to Upper Case</button>
+
+    <div id="sentenceCaseResult" class="result-box"></div>
+    <div class="options">
+        <button onclick="copySentenceCase()">Copy Sentence Case</button>
+    </div>
+    <div id="uppercaseResult" class="result-box"></div>
+    <div class="options">
+        <button onclick="copyUpperCase()">Copy Upper Case</button>
+    </div>
+
+    <div class="footer" style="text-align: center; padding: 5px;">
+        <p style="margin: 0;">
+            <span style="float: right;"><b>%1<i>SAI CHARAN</i>%2</b></span>
+        </p>
+    </div>
+
+    <script>
+        function convertToSentenceCase() {
+            const inputText = document.getElementById("inputText").value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(inputText, 'text/html');
+            const elements = doc.body.getElementsByTagName('*');
+
+            function processNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.textContent.toLowerCase();
+                    let result = '';
+                    let capitalizeNext = true;
+                    const specialNames = [
+                        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+                        "Himachal Pradesh", "Jharkhand", "South-Westerly", "South-Easterly", "Central", "Malabar Coast", "Nil", "IST", "Day", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+                        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", 
+                        "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", 
+                        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Andhra Coast", "Andhra", "Delhi", "Puducherry", 
+                        "Konkan", "North", "South", "East", "West", "Bay of Bengal", "INCOIS", "Westcentral", "Coromandel Coast", "Northern", "Southern", "Eastern", "Western", "Southeast", "Northwest", "Northeast", "Southwest", "Northwest"               
+                    ];
+
+                    for (let i = 0; i < text.length; i++) {
+                        let char = text[i];
+
+                        if (capitalizeNext && char >= 'a' && char <= 'z') {
+                            char = char.toUpperCase();
+                            capitalizeNext = false;
+                        }
+
+                        if (char === '.' || char === '!' || char === '?') {
+                            capitalizeNext = true;
+                        }
+
+                        result += char;
+                    }
+
+                    specialNames.forEach(name => {
+                        const regex = new RegExp(`\\b${name.toLowerCase()}\\b`, 'g');
+                        result = result.replace(regex, name);
+                    });
+
+                    node.textContent = result;
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    for (let i = 0; i < node.childNodes.length; i++) {
+                        processNode(node.childNodes[i]);
+                    }
+                }
+            }
+
+            for (let i = 0; i < elements.length; i++) {
+                processNode(elements[i]);
+            }
+
+            document.getElementById("sentenceCaseResult").innerHTML = doc.body.innerHTML;
+        }
+
+        function convertToUpperCase() {
+            const inputText = document.getElementById("inputText").value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(inputText, 'text/html');
+            const elements = doc.body.getElementsByTagName('*');
+
+            function processNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    node.textContent = node.textContent.toUpperCase();
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    for (let i = 0; i < node.childNodes.length; i++) {
+                        processNode(node.childNodes[i]);
+                    }
+                }
+            }
+
+            for (let i = 0; i < elements.length; i++) {
+                processNode(elements[i]);
+            }
+
+            document.getElementById("uppercaseResult").innerHTML = doc.body.innerHTML;
+        }
+
+        function copySentenceCase() {
+            const result = document.getElementById("sentenceCaseResult").innerHTML;
+            copyToClipboard(result);
+        }
+
+        function copyUpperCase() {
+            const result = document.getElementById("uppercaseResult").innerHTML;
+            copyToClipboard(result);
+        }
+
+        function copyToClipboard(html) {
+            const textarea = document.createElement("textarea");
+            textarea.value = html;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Text copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
+```
