@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,11 +70,26 @@
         }
     </style>
 </head>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date();
+
+    // Format to YYYY-MM-DD
+    const formattedDate = today.toISOString().split('T')[0];
+
+    document.getElementById("alertDate").value = formattedDate;
+});
+</script>
 <body>
         <form id="weatherAlertForm" onsubmit="return false;">
         <div class="form-group">
             <label for="alertDate">Date</label>
             <input type="date" id="alertDate" required>
+            const hours = String(today.getHours()).padStart(2, '0');
+const minutes = String(today.getMinutes()).padStart(2, '0');
+document.getElementById("alertTime").value = `${hours}:${minutes}`;
+            
         </div>
         <div class="form-group">
             <label for="alertTime">Time (24-hour format)</label>
@@ -363,39 +379,71 @@ function generateSecondAlert() {
             window.open(whatsappUrl, '_blank');
         }
 
-     function sendViaGmail(elementId) {
+  function sendViaGmail(elementId) {
+
     const alertDate = formatDateString(document.getElementById('alertDate').value);
     const alertTime = formatTimeString(document.getElementById('alertTime').value);
     const text = document.getElementById(elementId).textContent;
 
-
     const alertStart = "CWC-Visakhapatnam/Date:";
     const startIndex = text.indexOf(alertStart);
 
+    if (startIndex === -1) {
+        alert("Alert message format not found.");
+        return;
+    }
 
     const alertMessage = text.substring(startIndex).trim();
 
+    // Get selected districts
+    const selectedDistricts = Array.from(
+        document.querySelectorAll('input[name="district"]:checked')
+    ).map(el => el.value);
 
-    const selectedDistricts = Array.from(document.querySelectorAll('input[name="district"]:checked')).map(el => el.value);
-    const districtEmailsList = selectedDistricts.map(district => districtEmails[district]);
-    const allEmails = districtEmailsList.flat().concat([
-        "apdata2021@gmail.com",      
-        "mc.amaravati@gmail.com",
-        "seoc-apsdma@ap.gov.in",
-        "wxchannel@gmail.com",
-        "mcamaravati.ws@imd.gov.in",
-        "nowcastdivision@gmail.com",
-        "wxchannel1@gmail.com"
-    ]).join(',');
+    if (selectedDistricts.length === 0) {
+        alert("Please select at least one district.");
+        return;
+    }
 
+    // Get district emails safely
+    const districtEmailsList = selectedDistricts.map(
+        district => districtEmails[district] || []
+    );
 
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(allEmails)}&su=District%20severe%20weather%20warning%20dated%20${encodeURIComponent(alertDate)}%20at%20${encodeURIComponent(alertTime)}%20HRS%20IST&body=${encodeURIComponent(alertMessage)}`;
-    window.open(gmailUrl, '_blank');
+    const fixedEmails = [
+        "APDATA 2021 <apdata2021@gmail.com>",
+        "apsdma@ap.gov.in",
+        "Amaravati Met Centre <mc.amaravati@gmail.com>",
+        "APSDMA SEOC <seoc-apsdma@ap.gov.in>",
+        "IMD Weather Channel <wxchannel@gmail.com>",
+        "Met Centre Amaravati IMD <mcamaravati.ws@imd.gov.in>",
+        "Nowcast Division <nowcastdivision@gmail.com>",
+        "nwfc weather <wxchannel1@gmail.com>"
+    ];
+
+    // Merge + remove duplicates
+    const allEmails = [...new Set([
+        ...districtEmailsList.flat(),
+        ...fixedEmails
+    ])];
+
+const subject = `District severe weather warning dated ${alertDate} at ${alertTime} HRS IST`;
+
+const body = `${alertMessage}`;
+
+const mailtoLink =
+    `mailto:${allEmails.join(',')}` +
+    `?subject=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(body)}`;
+
+// ✅ Works on Mobile + Desktop
+window.location.href = mailtoLink;
 }
-        function generateBothAlerts() {
-            generateFirstAlert();
-            generateSecondAlert();
-        }
+
+function generateBothAlerts() {
+    generateFirstAlert();
+    generateSecondAlert();
+}
 
 
         function selectLightSettings() {
