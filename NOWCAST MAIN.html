@@ -193,12 +193,12 @@ document.getElementById("alertTime").value = `${hours}:${minutes}`;
             <label for="rainfallIntensity">Rainfall Intensity</label>
             <select id="rainfallIntensity" required>
                 <option value="">Select...</option>
-                <option value="light rainall">light</option>
-                <option value="moderate rainall">moderate</option>
-                <option value="heavy rainall">heavy</option>
+                <option value="light rainfall">light</option>
+                <option value="moderate rainfall">moderate</option>
+                <option value="heavy rainfall">heavy</option>
                 <option value="heavy rainfall with possibility of hail">heavy hail</option>
-                <option value="light to moderate rainall">light to mod</option>
-                <option value="moderate to heavy rainall">moderateto heavy</option>                
+                <option value="light to moderate rainfall">light to mod</option>
+                <option value="moderate to heavy rainfall">moderateto heavy</option>                
             </select>
         </div>
 
@@ -456,7 +456,7 @@ function generateBothAlerts() {
             document.getElementById('locationCoverage').value= "one or two places";
             document.getElementById('windDescription').value= "gusty winds";
             document.getElementById('windSpeed').value= "30-40 kmph";
-            document.getElementById('rainfallIntensity').value="light";
+            document.getElementById('rainfallIntensity').value="light rainfall";
         }
 
         function selectModerateSettings() {
@@ -467,7 +467,7 @@ function generateBothAlerts() {
             document.getElementById('locationCoverage').value= "a few places";
             document.getElementById('windDescription').value= "gusty winds";
             document.getElementById('windSpeed').value= "40-50 kmph";
-            document.getElementById('rainfallIntensity').value= "moderate";
+            document.getElementById('rainfallIntensity').value= "moderate rainfall";
         }
         
           function selectHeavySettings() {
@@ -478,7 +478,7 @@ function generateBothAlerts() {
             document.getElementById('locationCoverage').value= "a few places";
             document.getElementById('windDescription').value= "squally winds";
             document.getElementById('windSpeed').value= "50-60 kmph";
-            document.getElementById('rainfallIntensity').value= "heavy";
+            document.getElementById('rainfallIntensity').value= "heavy rainfall";
         }
           
         function clearDistrictSelection() {
