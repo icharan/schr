@@ -311,7 +311,7 @@ function generateFirstAlert() {
             : selectedDistricts[0] || 'N/A';
     }
 
-    const alertMessage = `*CWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :*\n\n*${thunderstormIntensity}* Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and *${rainfallIntensity}* rainfall ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
+    const alertMessage = `*CWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :*\n\n*${thunderstormIntensity}* Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and *${rainfallIntensity}* ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
 
     const alertWithoutEmails = document.getElementById('alertWithoutEmails');
     alertWithoutEmails.textContent = alertMessage;
@@ -358,7 +358,7 @@ function generateSecondAlert() {
             : selectedDistricts[0] || 'N/A';
     }
 
-    const alertMessage = `District Severe Weather Warning Dated ${alertDate} at ${alertTime} HRS IST.\n\n${districtEmailsList.join(', ')}${fixedEmails.length > 0 ? ', ' + fixedEmails.join(', ') : ''}\n\nCWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :\n\n${thunderstormIntensity} Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and ${rainfallIntensity} rainfall ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
+    const alertMessage = `District Severe Weather Warning Dated ${alertDate} at ${alertTime} HRS IST.\n\n${districtEmailsList.join(', ')}${fixedEmails.length > 0 ? ', ' + fixedEmails.join(', ') : ''}\n\nCWC-Visakhapatnam/Date:${alertDate} at ${alertTime} HRS IST ${AlertType} :\n\n${thunderstormIntensity} Thunderstorm accompanied with lightning, ${windDescription} speed reaching ${windSpeed} and ${rainfallIntensity} ${lightningLikelihood} to occur at ${locationCoverage} over ${districtString} ${yanamIncluded ? '' : (selectedDistricts.length === 1 ? "district" : "districts")} within the next 03 hours\n===`;
 
     const alertWithEmails = document.getElementById('alertWithEmails');
     alertWithEmails.textContent = alertMessage;
